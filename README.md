@@ -50,7 +50,7 @@ To explore this question, we clean and preprocess the original dataset and focus
 - Include a small table preview of the cleaned dataset (5 rows).
 
 ### Univariate Analysis
-Briefly describe trends observed in one key column.
+The distribution of outage durations is extremely right-skewed, with most outages lasting under a few thousand minutes while a small number last tens of thousands of minutes. This indicates that long, severe outages are rare but disproportionately impactful.
 
 **Plot:**  
 <iframe
@@ -64,7 +64,12 @@ Briefly describe trends observed in one key column.
 Describe one meaningful relationship relevant to the question.
 
 **Plot:**  
-<iframe src="assets/bivariate.html" width="800" height="600" frameborder="0"></iframe>
+<iframe
+  src="assets/outage_duration_vs_severe_weather.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Interesting Grouped Table
 Include a Markdown table generated from a groupby or pivot.
