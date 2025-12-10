@@ -100,7 +100,7 @@ We focused on the missingness of CUSTOMERS.AFFECTED (how many customers were imp
 First, we tested whether the missingness of CUSTOMERS.AFFECTED depends on CAUSE.CATEGORY. We created an indicator CA_MISSING (True if CUSTOMERS.AFFECTED is missing, False otherwise) and encoded CAUSE.CATEGORY as numeric codes. Our test statistic was the difference in the mean encoded cause between rows where CUSTOMERS.AFFECTED is missing and rows where it is not.
 
 <iframe
-  src="assets/missingness_by_cause.html"
+  src="assets/missing_by_cause.html"
   width="800"
   height="400"
   frameborder="0"
