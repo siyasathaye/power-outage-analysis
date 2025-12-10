@@ -5,12 +5,26 @@
 ---
 
 ## Introduction
-- What dataset we used (Power Outage dataset).
-- What our main question is.
-- Why this question matters.
-- How many rows are in the cleaned dataset.
-- The columns relevant to our question and what they represent.
+In this project, we analyze a dataset of major power outages in the United States which spans outages from January 2000 to July 2016, acquired from Purdue University’s Laboratory for Advancing Sustainable Critical Infrastructure, at https://engineering.purdue.edu/LASCI/research-data/outages. Along with key information regarding each outage, the dataset includes information about weather conditions, the region and climate in which the outage occurred, and how each outage impacted customers, making it well suited for understanding how severe weather conditions can impact outage severity.
 
+Our project's research question is:
+
+> **How do severe weather events influence the duration and overall impact of major power outages across different regions in the United States?**
+
+Major power outages can result in substantial economic, social, and safety costs. As severe weather events continue to become more and more common, power companies need to understand the correlation between these extreme weather events and the longer, more severe power outages. Understanding this is essential for informing prevention strategies, infrastructure investment, and emergency response planning.
+
+To explore this question, we clean and preprocess the original dataset and focus our analysis on the columns most relevant to outage severity, cause, and weather information. Our working dataset has 1534 rows and we will focus on the following columns:
+
+| Column Name | Description |
+|-------------|-------------|
+| **OUTAGE.DURATION.MIN** | Total duration of each outage in minutes. |
+| **CAUSE.CATEGORY** | Categorical label describing the primary cause of the outage. |
+| **IS_SEVERE** | A boolean column we created to indicate whether each outage was caused by severe weather. |
+| **NERC.REGION** | The North American Electric Reliability Corporation region involved in each outage. |
+| **CLIMATE.CATEGORY** | Category describing the climate of the affected area. |
+| **CUSTOMERS.AFFECTED** | Number of customers affected by the outage. |
+
+These variables form the foundation of our exploratory data analysis, missingness investigation, hypothesis testing, and predictive modeling. By examining patterns across causes, regions, and weather conditions, our goal is to understand how severe weather influences both the duration and overall impact of major outages.
 ---
 
 ## Data Cleaning and Exploratory Data Analysis
