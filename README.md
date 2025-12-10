@@ -210,10 +210,55 @@ However, this is an **observational** dataset, not a randomized experiment. Ther
 ---
 
 ## Framing a Prediction Problem
-- Define the response variable.
-- Whether it's classification or regression.
-- Features that are allowed at prediction time.
-- Metric you will use and why it’s appropriate.
+Our prediction problem is:
+
+> **Can we predict whether a power outage will last more than 24 hours (1440 minutes) using information available at the start of the outage?**
+
+### Type of prediction problem
+
+This is a **binary classification** problem.
+
+We define:
+
+- **1 = long outage**: outage duration > 1440 minutes (severe outage)  
+- **0 = short outage**: outage duration ≤ 1440 minutes (non-severe outage)
+
+### Response variable
+
+To capture this, we create a new binary variable:
+
+- **Response variable:** `"LONG_OUTAGE"`  
+  - `"LONG_OUTAGE" = 1` if `OUTAGE.DURATION.MIN > 1440`  
+  - `"LONG_OUTAGE" = 0` otherwise  
+
+This response is meaningful for utilities because knowing in advance whether an outage is likely to exceed 24 hours helps with planning repairs, communicating with customers, and allocating resources.
+
+### Features used (information at time of prediction)
+
+We only use features that would be known **at the start of the outage**, when a prediction would realistically be made. These include:
+
+- **CAUSE.CATEGORY** – reported cause category of the outage  
+- **MONTH** and **YEAR** – when the outage starts  
+- **CLIMATE.CATEGORY** – climate episode for that year  
+- **NERC.REGION** – regional reliability organization  
+- **ANOMALY.LEVEL** – El Niño / La Niña anomaly level for the season  
+- **RES.CUSTOMERS** – baseline state-level residential customer count / infrastructure
+
+All of these are reasonable to know at or before the beginning of the outage, so we are not “cheating” by using future information.
+
+### Evaluation metric and justification
+
+We evaluate our classifier using **F1-score**.
+
+The classes are likely **imbalanced** (long, severe outages are less common than short outages), so plain accuracy could be misleading: a model that almost always predicts “short outage” could still have high accuracy but be useless for identifying truly long outages.
+
+F1-score is a good choice because:
+
+- It combines **precision** and **recall** into a single number.  
+- It especially penalizes **false negatives** (cases where we incorrectly predict an outage will be short when it actually becomes long), which are important to avoid in this context.  
+- It is commonly used for **imbalanced binary classification** problems like this one.
+
+Because of these reasons, F1-score is more informative than accuracy for this prediction problem.
 
 ---
 
