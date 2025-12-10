@@ -73,15 +73,16 @@ Both severe and non-severe outages show highly right-skewed duration distributio
 ### Grouped Table
 The table below summarizes outage duration statistics by cause category. Severe weather stands out as both **the most frequent cause of major outages** and one of the causes with a **higher median duration**, indicating that weather-driven outages are not only common but also relatively long-lasting.
 
-| CAUSE CATEGORY                 |   Mean Duration (min) | Median Duration (min) | Count |
-|-------------------------------|------------------------|-------------------------|-------|
-| equipment failure             | 1816.91                | 221.0                   | 55    |
-| fuel supply emergency         | 13484.03               | 3960.0                  | 38    |
-| intentional attack            | 429.98                 | 56.0                    | 403   |
-| islanding                     | 200.55                 | 77.5                    | 44    |
-| public appeal                 | 1468.45                | 455.0                   | 69    |
-| severe weather                | 3883.99                | 2460.0                  | 744   |
-| system operability disruption | 728.87                 | 215.0                   | 123   |
+| Cause Category               | Mean Duration (min) | Median Duration (min) | Count |
+|-----------------------------|----------------------|------------------------|-------|
+| equipment failure           | 1816.91              | 221.0                  | 55    |
+| fuel supply emergency       | 13484.03             | 3960.0                 | 38    |
+| intentional attack          | 429.98               | 56.0                   | 403   |
+| islanding                   | 200.55               | 77.5                   | 44    |
+| public appeal               | 1468.45              | 455.0                  | 69    |
+| severe weather              | 3883.99              | 2460.0                 | 744   |
+| system operability disruption | 728.87             | 215.0                  | 123   |
+
 ---
 
 ## Assessment of Missingness
