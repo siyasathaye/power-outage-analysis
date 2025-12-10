@@ -95,17 +95,40 @@ To make this missingness MAR... NOT FINISHED
 ### Missingness Dependency Test
 We focused on the missingness of CUSTOMERS.AFFECTED (how many customers were impacted by an outage). We wanted to see whether missing values in this column depend on other variables in the dataset.
 
-#### Does missingness depend on outage cause?
+##### Does missingness depend on outage cause?
 
 First, we tested whether the missingness of CUSTOMERS.AFFECTED depends on CAUSE.CATEGORY. We created an indicator CA_MISSING (True if CUSTOMERS.AFFECTED is missing, False otherwise) and encoded CAUSE.CATEGORY as numeric codes. Our test statistic was the difference in the mean encoded cause between rows where CUSTOMERS.AFFECTED is missing and rows where it is not.
 
+<iframe
+  src="assets/missingness_by_cause.html"
+  width="800"
+  height="400"
+  frameborder="0"
+></iframe>
+
 Using 5,000 permutations of the CA_MISSING labels, we generated a null distribution assuming missingness is independent of CAUSE.CATEGORY. The observed difference was about −1.57, and the permutation p-value was 0.0 (no permuted statistic was as extreme as the observed one). This provides strong evidence that the missingness of CUSTOMERS.AFFECTED does depend on CAUSE.CATEGORY. In other words, some outage causes are systematically more likely to have the number of affected customers left blank.
 
-#### Does missingness depend on U.S. state?
+<iframe
+  src="assets/missingness_dep_cause.html"
+  width="800"
+  height="400"
+  frameborder="0"
+></iframe>
+
+##### Does missingness depend on U.S. state?
 
 Next, we tested whether the missingness of CUSTOMERS.AFFECTED depends on U.S._STATE. We again used CA_MISSING as the indicator, encoded U.S._STATE as numeric state codes, and used the difference in mean state code between missing and non-missing rows as our statistic.
 
+
+
 After running 5,000 permutations of the missingness labels, the observed difference (~0.53) landed near the center of the null distribution, with a permutation p-value of about 0.52. Since this p-value is large, we do not have evidence that missingness in CUSTOMERS.AFFECTED depends on U.S._STATE; the pattern of missing values looks consistent with chance variation across states.
+
+<iframe
+  src="assets/missingness_state_null.html"
+  width="800"
+  height="400"
+  frameborder="0"
+></iframe>
 
 Interpretation
 
