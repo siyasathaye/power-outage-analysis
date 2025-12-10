@@ -213,57 +213,16 @@ There is **strong statistical evidence** in this dataset that outages marked as 
 
 However, this is an **observational** dataset, not a randomized experiment. Therefore, we **cannot prove** that severity *causes* longer outages—we can only say that severity is **strongly associated** with longer outage duration in this data.
 
-### Visualization (optional)
+### Visualization
 
 The figure below shows the **null distribution** of the difference in mean outage duration from the permutation test (blue bars), with the **observed statistic** \(T_{\text{obs}}\) drawn as a vertical red line. The observed value lies far in the right tail of the null distribution, which is consistent with the very small p-value.
 
-df_null_weather = pd.DataFrame({"null_stat": null_stats})
-
-fig = px.histogram(
-    df_null_weather,
-    x="null_stat",
-    nbins=50,
-    title="Null Distribution of Difference in Means (Weather vs Non-Weather)"
-)
-
-# Add observed statistic line with annotation (optional but nice for consistency)
-fig.add_vline(
-    x=obs_stat,
-    line_width=5,
-    line_color="red",
-    annotation_text=f"Observed Statistic = {obs_stat:.4f}",
-    annotation_position="top right"
-)
-
-# Make bars same light blue
-fig.update_traces(marker_color="#6fa8dc")
-
-# Match fonts to your other plots
-fig.update_layout(
-    xaxis_title="Difference in Mean Outage Duration (min)",
-    yaxis_title="Frequency",
-    font=dict(
-        family="'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif",
-        size=14
-    ),
-    title_font=dict(
-        family="'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif",
-        size=20
-    ),
-    xaxis_title_font=dict(
-        family="'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif",
-        size=16
-    ),
-    yaxis_title_font=dict(
-        family="'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif",
-        size=16
-    )
-)
-
-fig.show()
-
-# Save for website embedding (if you want like the others)
-fig.write_html("weather_null.html", include_plotlyjs="cdn")
+<iframe
+  src="assets/weather_null.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ---
 
