@@ -262,7 +262,7 @@ Because of these reasons, F1-score is more informative than accuracy for this pr
 ---
 
 ## Baseline Model
-For our baseline model, we use a **Logistic Regression** classifier to predict whether an outage lasts more than 24 hours. Logistic Regression is a simple, interpretable linear model, which makes it a suitable baseline before trying more complex models.
+For our baseline model, we use a **Logistic Regression** classifier to predict whether an outage lasts more than 24 hours. Logistic Regression is a simple, interpretable linear model, which makes it a good baseline before trying more complex models.
 
 ### Features in the baseline model
 
@@ -272,8 +272,6 @@ Our baseline model uses four features:
 - `"ANOMALY.LEVEL"` — numerical (quantitative)  
 - `"CLIMATE.CATEGORY"` — categorical (nominal)  
 - `"NERC.REGION"` — categorical (nominal)
-
-These features were chosen because they are available **at the start of the outage**, meaning they can legitimately be used for prediction based only on information known at prediction time.
 
 **Note on `CLIMATE.CATEGORY`:**  
 Although “Cold”, “Normal”, and “Warm” come from numeric ONI thresholds, the dataset only gives these broad categories and not the actual numeric values or exact distances between them. Because the spacing between categories isn’t defined, we treated `CLIMATE.CATEGORY` as a nominal variable and one-hot encoded it. This avoids assuming a linear or evenly spaced relationship that may not actually exist.
@@ -297,8 +295,6 @@ Using a `ColumnTransformer` ensures each type of feature receives the correct pr
 After training the baseline model on the training data and evaluating it on the held-out test set, we obtain:
 
 - **F1-score:** **0.426**
-
-We use F1-score as our evaluation metric due to class imbalance (long outages are less common), and because F1 balances both **precision** and **recall**, making it more informative than accuracy for this task.
 
 ### Is this model “good”?
 
