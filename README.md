@@ -262,10 +262,50 @@ Because of these reasons, F1-score is more informative than accuracy for this pr
 ---
 
 ## Baseline Model
-- Describe the pipeline (model + preprocessing).
-- List features used and encoding choices.
-- Report performance on the test set.
-- Brief interpretation of results.
+For our baseline model, we use a **Logistic Regression** classifier to predict whether an outage lasts more than 24 hours. Logistic Regression is a simple, interpretable linear model, which makes it a suitable baseline before trying more complex models.
+
+### Features in the baseline model
+
+Our baseline model uses four features:
+
+- **YEAR** — numerical (quantitative)  
+- **ANOMALY.LEVEL** — numerical (quantitative)  
+- **CLIMATE.CATEGORY** — categorical (nominal)  
+- **NERC.REGION** — categorical (nominal)
+
+These features were chosen because they are available **at the start of the outage**, meaning they can legitimately be used for prediction based only on information known at prediction time.
+
+### Encodings and preprocessing
+
+Since the model contains both numeric and categorical variables, we apply the following preprocessing steps inside a single `sklearn` Pipeline:
+
+- **Numeric features** (`YEAR`, `ANOMALY.LEVEL`):  
+  - Missing values imputed with the **median**
+
+- **Categorical features** (`CLIMATE.CATEGORY`, `NERC.REGION`):  
+  - Missing values imputed with the **most frequent** category  
+  - Encoded using **One-Hot Encoding** to convert categories into numerical indicator columns  
+  - `handle_unknown="ignore"` avoids issues with unseen categories during testing
+
+Using a `ColumnTransformer` ensures each type of feature receives the correct preprocessing automatically.
+
+### Baseline model performance
+
+After training the baseline model on the training data and evaluating it on the held-out test set, we obtain:
+
+- **F1-score:** **0.426**
+
+We use F1-score as our evaluation metric due to class imbalance (long outages are less common), and because F1 balances both **precision** and **recall**, making it more informative than accuracy for this task.
+
+### Is this model “good”?
+
+Overall, the baseline model performs **moderately**, but **not well**:
+
+- An F1-score of ~0.43 indicates the model struggles to correctly identify long outages.  
+- This is expected: the relationship between these features and outage duration is likely complex and nonlinear, and Logistic Regression may not capture those patterns.  
+- The baseline serves as a reasonable **starting point**, but leaves substantial room for improvement.
+
+In the next step (Final Model), we will explore a more flexible model that may better capture interactions and nonlinearities in the data.
 
 ---
 
