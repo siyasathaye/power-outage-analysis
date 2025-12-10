@@ -17,26 +17,26 @@ To explore this question, we clean and preprocess the original dataset and focus
 
 | **Column Name**         | **Description**                                                                                              |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| **OUTAGE.DURATION.MIN** | Total duration of the outage in minutes.                                                                     |
-| **CUSTOMERS.AFFECTED**  | Number of customers impacted by the outage.                                                                  |
-| **CAUSE.CATEGORY**      | Primary cause category assigned to the outage (e.g., severe weather, equipment failure, intentional attack). |
-| **ANOMALY.LEVEL**       | Oceanic Niño Index (ONI) value representing El Niño/La Niña conditions for the season.      |
-| **CLIMATE.REGION**      | High-level climate classification for the affected area (e.g., humid continental, subtropical).              |
-| **CLIMATE.CATEGORY**    | Local climate category associated with the outage location.                      |
-| **NERC.REGION**         | The North American Electric Reliability Corporation region where the outage occurred.                              |
-| **U.S._STATE**          | The U.S. state in which the outage occurred.                                                                 |
-| **YEAR**                | Calendar year in which the outage occurred.                                                                  |
-| **MONTH**               | Calendar month in which the outage occurred.                                                                 |
-| **TOTAL.PRICE**         | Average monthly electricity price in the U.S. state where outage occured.                    |
-| **TOTAL.SALES**         | Total electricity consumption in the U.S. state (megawatt-hour).                                                     |
-| **TOTAL.CUSTOMERS**     | Annual number of total customers served in the U.S. state.                                                 |
-| **PC.REALGSP.STATE**    | Per capita real gross state product (GSP) in the U.S. state (measured in 2009 chained U.S. dollars).                             |
-| **UTIL.REALGSP**        | Real GSP contributed by Utility industry (measured in 2009 chained U.S. dollars)             |
-| **POPULATION**          | Population in the U.S. state in a year                                                                      |
-| **POPPCT_URBAN**        | Percentage of the state's population living in urban areas.                                                  |
-| **POPDEN_URBAN**        | Population density (persons per square mile) in urban areas.                                                 |
-| **POPDEN_RURAL**        | Population density in rural areas.                                                                           |
-| **AREAPCT_URBAN**       | Percentage of land area classified as urban.                                                                 |
+| `'OUTAGE.DURATION.MIN'` | Total duration of the outage in minutes.                                                                     |
+| `'CUSTOMERS.AFFECTED'`  | Number of customers impacted by the outage.                                                                  |
+| `'CAUSE.CATEGORY'`      | Primary cause category assigned to the outage (e.g., severe weather, equipment failure, intentional attack). |
+| `'ANOMALY.LEVEL'`       | Oceanic Niño Index (ONI) value representing El Niño/La Niña conditions for the season.      |
+| `'CLIMATE.REGION'`      | High-level climate classification for the affected area (e.g., humid continental, subtropical).              |
+| `'CLIMATE.CATEGORY'`    | Local climate category associated with the outage location.                      |
+| `'NERC.REGION'`         | The North American Electric Reliability Corporation region where the outage occurred.                              |
+| `'U.S._STATE'`          | The U.S. state in which the outage occurred.                                                                 |
+| `'YEAR'`                | Calendar year in which the outage occurred.                                                                  |
+| `'MONTH'`               | Calendar month in which the outage occurred.                                                                 |
+| `'TOTAL.PRICE'`         | Average monthly electricity price in the U.S. state where outage occured.                    |
+| `'TOTAL.SALES'`         | Total electricity consumption in the U.S. state (megawatt-hour).                                                     |
+| `'TOTAL.CUSTOMERS'`     | Annual number of total customers served in the U.S. state.                                                 |
+| `'PC.REALGSP.STATE'`    | Per capita real gross state product (GSP) in the U.S. state (measured in 2009 chained U.S. dollars).                             |
+| `'UTIL.REALGSP'`        | Real GSP contributed by Utility industry (measured in 2009 chained U.S. dollars)             |
+| `'POPULATION'`          | Population in the U.S. state in a year                                                                      |
+| `'POPPCT_URBAN'`        | Percentage of the state's population living in urban areas.                                                  |
+| `'POPDEN_URBAN'`        | Population density (persons per square mile) in urban areas.                                                 |
+| `'POPDEN_RURAL'`        | Population density in rural areas.                                                                           |
+| `'AREAPCT_URBAN'`       | Percentage of land area classified as urban.                                                                 |
 
 
 
