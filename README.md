@@ -56,7 +56,7 @@ The distribution of outage durations is extremely right-skewed, with most outage
 <iframe
   src="assets/outage_duration_hist.html"
   width="800"
-  height="400"
+  height="600"
   frameborder="0"
 ></iframe>
 ### Bivariate Analysis
@@ -66,7 +66,7 @@ Both severe and non-severe outages show highly right-skewed duration distributio
 <iframe
   src="assets/outage_duration_vs_severe_weather.html"
   width="800"
-  height="400"
+  height="600"
   frameborder="0"
 ></iframe>
 
@@ -97,47 +97,58 @@ We focused on the missingness of CUSTOMERS.AFFECTED (how many customers were imp
 
 ##### Does missingness depend on outage cause?
 
-FIX THIS: First, we tested whether the missingness of CUSTOMERS.AFFECTED depends on CAUSE.CATEGORY. We created an indicator CA_MISSING (True if CUSTOMERS.AFFECTED is missing, False otherwise) and encoded CAUSE.CATEGORY as numeric codes. Our test statistic was the difference in the mean encoded cause between rows where CUSTOMERS.AFFECTED is missing and rows where it is not.
+To explore whether the missingness of CUSTOMERS.AFFECTED depends on CAUSE.CATEGORY, we first compared missingness proportions among every different outage cause.
+
+Several patterns stand out. For example, intentional attack and fuel supply emergency outages have a noticeably higher proportion of missing customer counts, while categories like severe weather tend to have more complete data. This suggested that missingness may not be random but in fact related to certain causes.
 
 <iframe
   src="assets/missing_by_cause.html"
   width="800"
-  height="400"
+  height="600"
   frameborder="0"
 ></iframe>
 
-FIX THIS: Using 5,000 permutations of the CA_MISSING labels, we generated a null distribution assuming missingness is independent of CAUSE.CATEGORY. The observed difference was about −1.57, and the permutation p-value was 0.0 (no permuted statistic was as extreme as the observed one). This provides strong evidence that the missingness of CUSTOMERS.AFFECTED does depend on CAUSE.CATEGORY. In other words, some outage causes are systematically more likely to have the number of affected customers left blank.
+Next, we actually tested whether the missingness of CUSTOMERS.AFFECTED depends on CAUSE.CATEGORY using a permutation test. We encoded each cause category as a numeric code and computed our test statistic: the difference in the mean encoded cause category between rows where CUSTOMERS.AFFECTED is missing and rows where it is not.
+
+We calculated an observed test statistic of (~-1.57) and then we generated 5,000 permutations of the missingness labels to simulate a null distribution where missingness is independent of cause category. The histogram below shows this null distribution, with the observed statistic marked by a red vertical line.
+
+Our observed value lies far outside the range of permuted statistics, producing a p-value of 0.0. This means none of the 5,000 shuffled datasets produced a difference as extreme as the real one. Therefore, we have strong evidence that missingness in CUSTOMERS.AFFECTED does depend on outage cause and is not random. 
 
 <iframe
   src="assets/missingness_dep_cause.html"
   width="800"
-  height="400"
+  height="600"
   frameborder="0"
 ></iframe>
 
 ##### Does missingness depend on U.S. state?
 
-FIX THIS: Next, we tested whether the missingness of CUSTOMERS.AFFECTED depends on U.S._STATE. We again used CA_MISSING as the indicator, encoded U.S._STATE as numeric state codes, and used the difference in mean state code between missing and non-missing rows as our statistic.
+To investigate whether the missingness of CUSTOMERS.AFFECTED depends on U.S._STATE, we again used CA_MISSING as an indicator for whether the value is missing. We then compared missingness proportions among every different state label we had.
+
+The plot below shows, for each state, the proportion of outages in which CUSTOMERS.AFFECTED is missing (blue) or not missing (purple). If state were related to missingness, we would expect certain states to have consistently higher missing proportions than others.
+
+However, the proportions vary without a clear pattern or consistent separation between the “missing” and “not missing” groups. No particular state stands out as having a disproportionately high share of missing values.
 
 <iframe
   src="assets/customers_missing_by_state.html"
   width="800"
-  height="400"
+  height="600"
   frameborder="0"
 ></iframe>
 
-FIX THIS: After running 5,000 permutations of the missingness labels, the observed difference (~0.53) landed near the center of the null distribution, with a permutation p-value of about 0.52. Since this p-value is large, we do not have evidence that missingness in CUSTOMERS.AFFECTED depends on U.S._STATE; the pattern of missing values looks consistent with chance variation across states.
+Next, we tested this relationship using a permutation test. We again encoded U.S. states as numeric state codes, calculated the difference in mean state code between missing and non-missing observations, and compared this observed statistic to a null distribution created using 5,000 random label shuffles.
+
+The observed difference was approximately 0.53, and the null distribution (shown below) is centered near zero. The observed statistic falls comfortably within the null distribution, corresponding to a permutation p-value of about 0.52.
+
+Because the p-value is large, we do not have evidence that the missingness of CUSTOMERS.AFFECTED depends on U.S._STATE. In other words, any variation in missingness across states appears consistent with random chance rather than a systematic pattern.
 
 <iframe
   src="assets/missingness_state_null.html"
   width="800"
-  height="400"
+  height="600"
   frameborder="0"
 ></iframe>
 
-Interpretation
-
-Taken together, these results suggest that missingness in CUSTOMERS.AFFECTED is not MCAR (it clearly depends on CAUSE.CATEGORY), but it is consistent with MAR: whether the value is missing can be explained by an observed variable (outage cause) rather than by the unobserved customer count itself. We do not see evidence that missingness additionally depends on geography (U.S._STATE).
 
 ---
 
