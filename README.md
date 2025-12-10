@@ -13,14 +13,14 @@ Our project's research question is:
 
 Major power outages can result in substantial economic, social, and safety costs. As severe weather events continue to become more and more common, power companies need to understand the correlation between these extreme weather events and the longer, more severe power outages. Understanding this is essential for informing prevention strategies, infrastructure investment, and emergency response planning.
 
-To explore this question, we clean and preprocess the original dataset and focus our analysis on the columns most relevant to outage severity, cause, and weather information. Our working dataset has 1534 rows and we will focus on the following columns:
+To explore this question, we clean and preprocess the original dataset and focus our analysis on the columns most relevant to outage severity, cause, and weather information. Our working dataset has 1534 rows and we will focus our analysis on the following columns:
 
 | **Column Name**         | **Description**                                                                                              |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
 | **OUTAGE.DURATION.MIN** | Total duration of the outage in minutes.                                                                     |
 | **CUSTOMERS.AFFECTED**  | Number of customers impacted by the outage.                                                                  |
 | **CAUSE.CATEGORY**      | Primary cause category assigned to the outage (e.g., severe weather, equipment failure, intentional attack). |
-| **ANOMALY.LEVEL**       | Climate anomaly value describing how unusual the temperature/conditions were during the outage period.       |
+| **ANOMALY.LEVEL**       | Oceanic Niño Index (ONI) value representing El Niño/La Niña conditions for the season.      |
 | **CLIMATE.REGION**      | High-level climate classification for the affected area (e.g., humid continental, subtropical).              |
 | **CLIMATE.CATEGORY**    | Local climate category associated with the outage location (used in EDA + missingness).                      |
 | **NERC.REGION**         | The North American Electric Reliability Corporation region where the outage occurred.                              |
