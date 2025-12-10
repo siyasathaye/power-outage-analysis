@@ -231,20 +231,19 @@ To capture this, we create a new binary variable:
   - `"LONG_OUTAGE" = 1` if `OUTAGE.DURATION.MIN > 1440`  
   - `"LONG_OUTAGE" = 0` otherwise  
 
-This response is meaningful for utilities because knowing in advance whether an outage is likely to exceed 24 hours helps with planning repairs, communicating with customers, and allocating resources.
+This response is meaningful for power companies because being able to predict whether an outage is likely to exceed 24 hours helps with planning repairs, communicating with customers, and allocating resources to those affected.
 
 ### Features used (information at time of prediction)
 
-We only use features that would be known **at the start of the outage**, when a prediction would realistically be made. These include:
+We will only use features that would be known **at the start of the outage**, when a prediction would realistically be made. These include:
 
-- **CAUSE.CATEGORY** – reported cause category of the outage  
-- **MONTH** and **YEAR** – when the outage starts  
-- **CLIMATE.CATEGORY** – climate episode for that year  
-- **NERC.REGION** – regional reliability organization  
-- **ANOMALY.LEVEL** – El Niño / La Niña anomaly level for the season  
-- **RES.CUSTOMERS** – baseline state-level residential customer count / infrastructure
+- **CAUSE.CATEGORY**  
+- **MONTH** and **YEAR**  
+- **CLIMATE.CATEGORY**  
+- **NERC.REGION**  
+- **ANOMALY.LEVEL**  
+- **RES.CUSTOMERS**
 
-All of these are reasonable to know at or before the beginning of the outage, so we are not “cheating” by using future information.
 
 ### Evaluation metric and justification
 
