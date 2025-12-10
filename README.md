@@ -88,8 +88,9 @@ The table below summarizes outage duration statistics by cause category. Severe 
 ## Assessment of Missingness
 
 ### NMAR Discussion
-Explain which column might be NMAR and why.  
-Explain what additional data would make it MAR.
+I believe the CUSTOMERS.AFFECTED column is NMAR. The likelihood that this value is missing may depend on whether the number of customers actually affected is very large. Power companies may fail to collect customer counts for very small outages (because they are considered insignificant). 
+
+To make this missingness MAR... NOT FINISHED
 
 ### Missingness Dependency Test
 Describe your permutation test on missingness.
