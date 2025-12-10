@@ -15,16 +15,29 @@ Major power outages can result in substantial economic, social, and safety costs
 
 To explore this question, we clean and preprocess the original dataset and focus our analysis on the columns most relevant to outage severity, cause, and weather information. Our working dataset has 1534 rows and we will focus on the following columns:
 
-| Column Name | Description |
-|-------------|-------------|
-| **OUTAGE.DURATION.MIN** | Total duration of each outage in minutes. |
-| **CAUSE.CATEGORY** | Categorical label describing the primary cause of the outage. |
-| **IS_SEVERE** | A boolean column we created to indicate whether each outage was caused by severe weather. |
-| **NERC.REGION** | The North American Electric Reliability Corporation region involved in each outage. |
-| **CLIMATE.CATEGORY** | Category describing the climate of the affected area. |
-| **CUSTOMERS.AFFECTED** | Number of customers affected by the outage. |
+| **Column Name**         | **Description**                                                                                              |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **OUTAGE.DURATION.MIN** | Total duration of the outage in minutes.                                                                     |
+| **CUSTOMERS.AFFECTED**  | Number of customers impacted by the outage.                                                                  |
+| **CAUSE.CATEGORY**      | Primary cause category assigned to the outage (e.g., severe weather, equipment failure, intentional attack). |
+| **ANOMALY.LEVEL**       | Climate anomaly value describing how unusual the temperature/conditions were during the outage period.       |
+| **CLIMATE.REGION**      | High-level climate classification for the affected area (e.g., humid continental, subtropical).              |
+| **CLIMATE.CATEGORY**    | Local climate category associated with the outage location (used in EDA + missingness).                      |
+| **NERC.REGION**         | The North American Electric Reliability Corporation region where the outage occurred.                              |
+| **U.S._STATE**          | The U.S. state in which the outage occurred.                                                                 |
+| **YEAR**                | Calendar year in which the outage occurred.                                                                  |
+| **MONTH**               | Calendar month in which the outage occurred.                                                                 |
+| **TOTAL.PRICE**         | Average monthly electricity price in the U.S. state where outage occured.                    |
+| **TOTAL.SALES**         | Total electricity consumption in the U.S. state (megawatt-hour).                                                     |
+| **TOTAL.CUSTOMERS**     | Annual number of total customers served in the U.S. state.                                                 |
+| **PC.REALGSP.STATE**    | Per capita real gross state product (GSP) in the U.S. state (measured in 2009 chained U.S. dollars).                             |
+| **UTIL.REALGSP**        | Real GSP contributed by Utility industry (measured in 2009 chained U.S. dollars)             |
+| **POPULATION**          | Population in the U.S. state in a year                                                                      |
+| **POPPCT_URBAN**        | Percentage of the state's population living in urban areas.                                                  |
+| **POPDEN_URBAN**        | Population density (persons per square mile) in urban areas.                                                 |
+| **POPDEN_RURAL**        | Population density in rural areas.                                                                           |
+| **AREAPCT_URBAN**       | Percentage of land area classified as urban.                                                                 |
 
-hi
 
 
 ---
