@@ -150,7 +150,7 @@ Because the p-value is large, we do not have evidence that the missingness of CU
 ---
 
 ## Hypothesis Testing
-### **Research question.**  
+#### **Research question:**  
 Do outages marked as *severe* last longer, on average, than outages that are *not* severe?
 
 ### Hypotheses
