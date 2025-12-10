@@ -163,7 +163,7 @@ Do outages marked as *severe* last longer, on average, than outages that are *no
   Severe outages have a **longer** average duration than non-severe outages  
   (mean duration for severe outages > mean duration for non-severe outages).
 
-This is a **one-sided** test because we are specifically interested in whether severe outages last **longer**, not just whether the means are different.
+We do a signed difference rather then absolute because we are specifically interested in whether severe outages last **longer**, not just whether the means are different.
 
 ### Test statistic and significance level
 
@@ -172,6 +172,8 @@ We used the **difference in sample means** as our test statistic:
 > test statistic = (mean duration for severe outages) − (mean duration for non-severe outages)
 
 From the data, the observed value of this statistic was approximately **2,538 minutes**.
+
+We used a **significance level of α = 0.05**, the standard choice which balances the risk of false positives with the ability to detect meaningful differences.
 
 ### Permutation test
 
