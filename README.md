@@ -237,12 +237,12 @@ This response is meaningful for power companies because being able to predict wh
 
 We will only use features that would be known **at the start of the outage**, when a prediction would realistically be made. These include:
 
-- **CAUSE.CATEGORY**  
-- **MONTH** and **YEAR**  
-- **CLIMATE.CATEGORY**  
-- **NERC.REGION**  
-- **ANOMALY.LEVEL**  
-- **RES.CUSTOMERS**
+- `"CAUSE.CATEGORY"`  
+- `"MONTH"` and `"YEAR"`  
+- `"CLIMATE.CATEGORY"`  
+- `"NERC.REGION"`  
+- `"ANOMALY.LEVEL"`  
+- `"RES.CUSTOMERS"`
 
 
 ### Evaluation metric and justification
