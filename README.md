@@ -163,11 +163,11 @@ Do outages marked as *severe* last longer, on average, than outages that are *no
   Severe outages have a **longer** average duration than non-severe outages  
   (mean duration for severe outages > mean duration for non-severe outages).
 
-This is a **one-sided** test because I am specifically interested in whether severe outages last **longer**, not just whether the means are different.
+This is a **one-sided** test because we are specifically interested in whether severe outages last **longer**, not just whether the means are different.
 
 ### Test statistic and significance level
 
-I used the **difference in sample means** as my test statistic:
+We used the **difference in sample means** as our test statistic:
 
 > test statistic = (mean duration for severe outages) − (mean duration for non-severe outages)
 
@@ -175,13 +175,26 @@ From the data, the observed value of this statistic was approximately **2,538 mi
 
 ### Permutation test
 
-To approximate the null distribution of this test statistic, I ran a **permutation test**:
+To approximate the null distribution of this test statistic, we ran a **permutation test**:
 
 1. Kept the outage durations fixed.
 2. Randomly shuffled the `"IS_SEVERE"` labels to break any association between severity and duration.
 3. For each shuffle, recomputed the difference in means:  
    (mean duration for outages labelled severe) − (mean duration for outages labelled non-severe).
 4. Repeated this **N = 5,000** times to build the null distribution of the test statistic.
+
+From these 5,000 permutations, **none** of the simulated test statistics were as large as the observed statistic.  
+The empirical p-value returned by the simulation was **0.0**, meaning that in all 5,000 shuffles, the difference in means was never as extreme as the observed value.
+
+
+The figure below shows the **null distribution** (blue bars) with the **observed statistic** shown as a vertical red line. The observed value lies far in the right tail, which matches the extremely small p-value.
+
+<iframe
+  src="assets/weather_null.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Conclusion
 
@@ -191,20 +204,6 @@ There is **strong statistical evidence** in this dataset that outages marked as 
 
 However, this is an **observational** dataset, not a randomized experiment. Therefore, we **cannot prove** that severity *causes* longer outages—we can only say that severity is **strongly associated** with longer outage duration in this data.
 
-### Visualization
-
-The figure below shows the **null distribution** of the difference in mean
-outage duration from the permutation test (blue bars), with the
-**observed statistic** (shown as a vertical red line). The observed value
-lies far in the right tail of the null distribution, which is consistent
-with the very small p-value.
-
-<iframe
-  src="assets/weather_null.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
 
 ---
 
