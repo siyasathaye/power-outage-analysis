@@ -106,8 +106,7 @@ Several patterns stand out. For example, intentional attack and fuel supply emer
   width="800"
   height="600"
   frameborder="0"
-></iframe>
-
+></iframe> 
 Next, we actually tested whether the missingness of CUSTOMERS.AFFECTED depends on CAUSE.CATEGORY using a permutation test. We encoded each cause category as a numeric code and computed our test statistic: the difference in the mean encoded cause category between rows where CUSTOMERS.AFFECTED is missing and rows where it is not.
 
 We calculated an observed test statistic of (~-1.57) and then we generated 5,000 permutations of the missingness labels to simulate a null distribution where missingness is independent of cause category. The histogram below shows this null distribution, with the observed statistic marked by a red vertical line.
@@ -120,7 +119,6 @@ Our observed value lies far outside the range of permuted statistics, producing 
   height="600"
   frameborder="0"
 ></iframe>
-
 ##### Does missingness depend on U.S. state?
 
 To investigate whether the missingness of CUSTOMERS.AFFECTED depends on U.S._STATE, we again used CA_MISSING as an indicator for whether the value is missing. We then compared missingness proportions among every different state label we had.
@@ -135,7 +133,6 @@ However, the proportions vary without a clear pattern or consistent separation b
   height="600"
   frameborder="0"
 ></iframe>
-
 Next, we tested this relationship using a permutation test. We again encoded U.S. states as numeric state codes, calculated the difference in mean state code between missing and non-missing observations, and compared this observed statistic to a null distribution created using 5,000 random label shuffles.
 
 The observed difference was approximately 0.53, and the null distribution (shown below) is centered near zero. The observed statistic falls comfortably within the null distribution, corresponding to a permutation p-value of about 0.52.
@@ -148,8 +145,6 @@ Because the p-value is large, we do not have evidence that the missingness of CU
   height="600"
   frameborder="0"
 ></iframe>
-
-
 ---
 
 ## Hypothesis Testing
