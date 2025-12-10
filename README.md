@@ -24,9 +24,9 @@ To explore this question, we clean and preprocess the original dataset and focus
 | **CLIMATE.CATEGORY** | Category describing the climate of the affected area. |
 | **CUSTOMERS.AFFECTED** | Number of customers affected by the outage. |
 
-<!-- spacing fix -->
-
+<p style="font-size: 14px; line-height: 1.6; margin-top: 1em;">
 These variables form the foundation of our exploratory data analysis, missingness investigation, hypothesis testing, and predictive modeling. By examining patterns across causes, regions, and weather conditions, our goal is to understand how severe weather influences both the duration and overall impact of major outages.
+</p>
 ---
 
 ## Data Cleaning and Exploratory Data Analysis
