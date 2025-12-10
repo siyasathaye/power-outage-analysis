@@ -56,7 +56,7 @@ The distribution of outage durations is extremely right-skewed, with most outage
 <iframe
   src="assets/outage_duration_hist.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 
@@ -67,7 +67,7 @@ Both severe and non-severe outages show highly right-skewed duration distributio
 <iframe
   src="assets/outage_duration_vs_severe_weather.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 
