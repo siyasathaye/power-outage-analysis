@@ -107,6 +107,7 @@ Several patterns stand out. For example, intentional attack and fuel supply emer
   height="600"
   frameborder="0"
 ></iframe> 
+
 Next, we actually tested whether the missingness of CUSTOMERS.AFFECTED depends on CAUSE.CATEGORY using a permutation test. We encoded each cause category as a numeric code and computed our test statistic: the difference in the mean encoded cause category between rows where CUSTOMERS.AFFECTED is missing and rows where it is not.
 
 We calculated an observed test statistic of (~-1.57) and then we generated 5,000 permutations of the missingness labels to simulate a null distribution where missingness is independent of cause category. The histogram below shows this null distribution, with the observed statistic marked by a red vertical line.
@@ -133,6 +134,7 @@ However, the proportions vary without a clear pattern or consistent separation b
   height="600"
   frameborder="0"
 ></iframe>
+
 Next, we tested this relationship using a permutation test. We again encoded U.S. states as numeric state codes, calculated the difference in mean state code between missing and non-missing observations, and compared this observed statistic to a null distribution created using 5,000 random label shuffles.
 
 The observed difference was approximately 0.53, and the null distribution (shown below) is centered near zero. The observed statistic falls comfortably within the null distribution, corresponding to a permutation p-value of about 0.52.
@@ -148,11 +150,120 @@ Because the p-value is large, we do not have evidence that the missingness of CU
 ---
 
 ## Hypothesis Testing
-- State null and alternative hypotheses in words.
-- Define the test statistic.
-- Explain how the null distribution was generated.
-- Report the observed statistic, p-value, and conclusion in plain English.
-- (Optional) Include plot of null distribution.
+**Research question.**  
+Do outages marked as *severe* last longer, on average, than outages that are *not* severe?
+
+### Hypotheses
+
+- **Null hypothesis (H₀):**  
+  The average outage duration is the same for severe and non-severe outages.  
+  \[
+  \mu_{\text{severe}} = \mu_{\text{non-severe}}
+  \]
+
+- **Alternative hypothesis (Hₐ):**  
+  Severe outages have a **longer** average duration than non-severe outages.  
+  \[
+  \mu_{\text{severe}} > \mu_{\text{non-severe}}
+  \]
+
+This is a **one-sided** test because I am specifically interested in whether severe outages last *longer*, not just whether the means are different.
+
+### Test statistic and significance level
+
+I used the **difference in sample means** as my test statistic:
+
+\[
+T = \text{mean duration for severe outages} - \text{mean duration for non-severe outages}.
+\]
+
+From the data, the observed value of this statistic was
+
+\[
+T_{\text{obs}} \approx 2538 \text{ minutes}.
+\]
+
+I used a significance level of **α = 0.05**.
+
+### Permutation test
+
+To approximate the null distribution of \(T\), I ran a **permutation test**:
+
+1. Kept the outage durations fixed.
+2. Randomly shuffled the `"IS_SEVERE"` labels to break any association between severity and duration.
+3. For each shuffle, recomputed
+   \[
+   T^{(b)} = \text{mean duration (labelled severe)} - \text{mean duration (labelled non-severe)}.
+   \]
+4. Repeated this **N = 5,000** times to build the null distribution of \(T\).
+
+The resulting null distribution of \(T\) is centered near 0 (what we would expect if severity and duration were unrelated). None of the 5,000 permuted statistics were as large as the observed value \(T_{\text{obs}}\).
+
+This gives an empirical one-sided p-value of
+
+\[
+p \approx \frac{0 + 1}{5000 + 1} \approx 0.0002 \quad (\text{effectively } p < 0.001).
+\]
+
+### Conclusion
+
+Because the p-value is far below our significance level of 0.05, we **reject the null hypothesis**.
+
+There is **strong statistical evidence** in this dataset that outages marked as *severe* last **longer on average** than outages that are not severe.
+
+However, this is an **observational** dataset, not a randomized experiment. Therefore, we **cannot prove** that severity *causes* longer outages—we can only say that severity is **strongly associated** with longer outage duration in this data.
+
+### Visualization (optional)
+
+The figure below shows the **null distribution** of the difference in mean outage duration from the permutation test (blue bars), with the **observed statistic** \(T_{\text{obs}}\) drawn as a vertical red line. The observed value lies far in the right tail of the null distribution, which is consistent with the very small p-value.
+
+df_null_weather = pd.DataFrame({"null_stat": null_stats})
+
+fig = px.histogram(
+    df_null_weather,
+    x="null_stat",
+    nbins=50,
+    title="Null Distribution of Difference in Means (Weather vs Non-Weather)"
+)
+
+# Add observed statistic line with annotation (optional but nice for consistency)
+fig.add_vline(
+    x=obs_stat,
+    line_width=5,
+    line_color="red",
+    annotation_text=f"Observed Statistic = {obs_stat:.4f}",
+    annotation_position="top right"
+)
+
+# Make bars same light blue
+fig.update_traces(marker_color="#6fa8dc")
+
+# Match fonts to your other plots
+fig.update_layout(
+    xaxis_title="Difference in Mean Outage Duration (min)",
+    yaxis_title="Frequency",
+    font=dict(
+        family="'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif",
+        size=14
+    ),
+    title_font=dict(
+        family="'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif",
+        size=20
+    ),
+    xaxis_title_font=dict(
+        family="'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif",
+        size=16
+    ),
+    yaxis_title_font=dict(
+        family="'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif",
+        size=16
+    )
+)
+
+fig.show()
+
+# Save for website embedding (if you want like the others)
+fig.write_html("weather_null.html", include_plotlyjs="cdn")
 
 ---
 
