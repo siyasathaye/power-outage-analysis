@@ -268,12 +268,15 @@ For our baseline model, we use a **Logistic Regression** classifier to predict w
 
 Our baseline model uses four features:
 
-- **YEAR** — numerical (quantitative)  
-- **ANOMALY.LEVEL** — numerical (quantitative)  
-- **CLIMATE.CATEGORY** — categorical (nominal)  
-- **NERC.REGION** — categorical (nominal)
+- `"YEAR"` — numerical (quantitative)  
+- `"ANOMALY.LEVEL"` — numerical (quantitative)  
+- `"CLIMATE.CATEGORY"` — categorical (nominal)  
+- `"NERC.REGION"` — categorical (nominal)
 
 These features were chosen because they are available **at the start of the outage**, meaning they can legitimately be used for prediction based only on information known at prediction time.
+
+**Note on `CLIMATE.CATEGORY`:**  
+Although “Cold”, “Normal”, and “Warm” come from numeric ONI thresholds, the dataset only gives these broad categories and not the actual numeric values or exact distances between them. Because the spacing between categories isn’t defined, we treated `CLIMATE.CATEGORY` as a nominal variable and one-hot encoded it. This avoids assuming a linear or evenly spaced relationship that may not actually exist.
 
 ### Encodings and preprocessing
 
