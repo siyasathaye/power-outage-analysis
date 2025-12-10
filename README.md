@@ -22,7 +22,7 @@ To explore this question, we clean and preprocess the original dataset and focus
 | **CAUSE.CATEGORY**      | Primary cause category assigned to the outage (e.g., severe weather, equipment failure, intentional attack). |
 | **ANOMALY.LEVEL**       | Oceanic Niño Index (ONI) value representing El Niño/La Niña conditions for the season.      |
 | **CLIMATE.REGION**      | High-level climate classification for the affected area (e.g., humid continental, subtropical).              |
-| **CLIMATE.CATEGORY**    | Local climate category associated with the outage location (used in EDA + missingness).                      |
+| **CLIMATE.CATEGORY**    | Local climate category associated with the outage location.                      |
 | **NERC.REGION**         | The North American Electric Reliability Corporation region where the outage occurred.                              |
 | **U.S._STATE**          | The U.S. state in which the outage occurred.                                                                 |
 | **YEAR**                | Calendar year in which the outage occurred.                                                                  |
@@ -53,7 +53,12 @@ To explore this question, we clean and preprocess the original dataset and focus
 Briefly describe trends observed in one key column.
 
 **Plot:**  
-<iframe src="assets/univariate.html" width="800" height="600" frameborder="0"></iframe>
+<iframe
+  src="assets/outage_duration_hist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Bivariate Analysis
 Describe one meaningful relationship relevant to the question.
