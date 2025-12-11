@@ -97,7 +97,7 @@ We focused on the missingness of CUSTOMERS.AFFECTED (how many customers were imp
 
 ##### Does missingness depend on outage cause?
 
-To explore whether the missingness of CUSTOMERS.AFFECTED depends on CAUSE.CATEGORY, we first compared missingness proportions among every different outage cause.
+To explore whether the missingness of `'CUSTOMERS.AFFECTED'` depends on `'CAUSE.CATEGORY'`, we first compared missingness proportions among every different outage cause.
 
 Several patterns stand out. For example, intentional attack and fuel supply emergency outages have a noticeably higher proportion of missing customer counts, while categories like severe weather tend to have more complete data. This suggested that missingness may not be random but in fact related to certain causes.
 
@@ -108,11 +108,11 @@ Several patterns stand out. For example, intentional attack and fuel supply emer
   frameborder="0"
 ></iframe> 
 
-Next, we actually tested whether the missingness of CUSTOMERS.AFFECTED depends on CAUSE.CATEGORY using a permutation test. We encoded each cause category as a numeric code and computed our test statistic: the difference in the mean encoded cause category between rows where CUSTOMERS.AFFECTED is missing and rows where it is not.
+Next, we actually tested whether the missingness of `'CUSTOMERS.AFFECTED'` depends on `'CAUSE.CATEGORY'` using a permutation test. We encoded each cause category as a numeric code and computed our test statistic: the difference in the mean encoded cause category between rows where `'CUSTOMERS.AFFECTED'` is missing and rows where it is not.
 
 We calculated an observed test statistic of (~-1.57) and then we generated 5,000 permutations of the missingness labels to simulate a null distribution where missingness is independent of cause category. The histogram below shows this null distribution, with the observed statistic marked by a red vertical line.
 
-Our observed value lies far outside the range of permuted statistics, producing a p-value of 0.0. This means none of the 5,000 shuffled datasets produced a difference as extreme as the real one. Therefore, we have strong evidence that missingness in CUSTOMERS.AFFECTED does depend on outage cause and is not random. 
+Our observed value lies far outside the range of permuted statistics, producing a p-value of 0.0. This means none of the 5,000 shuffled datasets produced a difference as extreme as the real one. Therefore, we have strong evidence that missingness in `'CUSTOMERS.AFFECTED'` does depend on outage cause and is not random. 
 
 <iframe
   src="assets/missingness_dep_cause.html"
@@ -122,9 +122,9 @@ Our observed value lies far outside the range of permuted statistics, producing 
 ></iframe>
 ##### Does missingness depend on U.S. state?
 
-To investigate whether the missingness of CUSTOMERS.AFFECTED depends on U.S._STATE, we again used CA_MISSING as an indicator for whether the value is missing. We then compared missingness proportions among every different state label we had.
+To investigate whether the missingness of `'CUSTOMERS.AFFECTED'` depends on `'U.S._STATE'`, we again used `'CA_MISSING'` as an indicator for whether the value is missing. We then compared missingness proportions among every different state label we had.
 
-The plot below shows, for each state, the proportion of outages in which CUSTOMERS.AFFECTED is missing (blue) or not missing (purple). If state were related to missingness, we would expect certain states to have consistently higher missing proportions than others.
+The plot below shows, for each state, the proportion of outages in which `'CUSTOMERS.AFFECTED'` is missing (blue) or not missing (purple). If state were related to missingness, we would expect certain states to have consistently higher missing proportions than others.
 
 However, the proportions vary without a clear pattern or consistent separation between the “missing” and “not missing” groups. No particular state stands out as having a disproportionately high share of missing values.
 
@@ -139,7 +139,7 @@ Next, we tested this relationship using a permutation test. We again encoded U.S
 
 The observed difference was approximately 0.53, and the null distribution (shown below) is centered near zero. The observed statistic falls comfortably within the null distribution, corresponding to a permutation p-value of about 0.52.
 
-Because the p-value is large, we do not have evidence that the missingness of CUSTOMERS.AFFECTED depends on U.S._STATE. In other words, any variation in missingness across states appears consistent with random chance rather than a systematic pattern.
+Because the p-value is large, we do not have evidence that the missingness of `'CUSTOMERS.AFFECTED'` depends on U.S._STATE. In other words, any variation in missingness across states appears consistent with random chance rather than a systematic pattern.
 
 <iframe
   src="assets/missingness_state_null.html"
