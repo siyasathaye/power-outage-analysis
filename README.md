@@ -180,7 +180,7 @@ We used a **significance level of α = 0.05**, the standard choice which balance
 To approximate the null distribution of this test statistic, we ran a **permutation test**:
 
 1. Kept the outage durations fixed.
-2. Randomly shuffled the `"IS_SEVERE"` labels to break any association between severity and duration.
+2. Randomly shuffled the `'IS_SEVERE'` labels to break any association between severity and duration.
 3. For each shuffle, recomputed the difference in means:  
    (mean duration for outages labelled severe) − (mean duration for outages labelled non-severe).
 4. Repeated this **N = 5,000** times to build the null distribution of the test statistic.
@@ -227,9 +227,9 @@ We define:
 
 To capture this, we create a new binary variable:
 
-- **Response variable:** `"LONG_OUTAGE"`  
-  - `"LONG_OUTAGE" = 1` if `OUTAGE.DURATION.MIN > 1440`  
-  - `"LONG_OUTAGE" = 0` otherwise  
+- **Response variable:** `'LONG_OUTAGE'`  
+  - `'LONG_OUTAGE'` = 1 if `'OUTAGE.DURATION.MIN'` > 1440  
+  - `'LONG_OUTAGE'` = 0 otherwise  
 
 This response is meaningful for power companies because being able to predict whether an outage is likely to exceed 24 hours helps with planning repairs, communicating with customers, and allocating resources to those affected.
 
@@ -237,12 +237,12 @@ This response is meaningful for power companies because being able to predict wh
 
 We will only use features that would be known **at the start of the outage**, when a prediction would realistically be made. These include:
 
-- `"CAUSE.CATEGORY"`  
-- `"MONTH"` and `"YEAR"`  
-- `"CLIMATE.CATEGORY"`  
-- `"NERC.REGION"`  
-- `"ANOMALY.LEVEL"`  
-- `"RES.CUSTOMERS"`
+- `'CAUSE.CATEGORY'`  
+- `'MONTH'` and `'YEAR'`  
+- `'CLIMATE.CATEGORY'`  
+- `'NERC.REGION'`  
+- `'ANOMALY.LEVEL'`  
+- `'RES.CUSTOMERS'`
 
 
 ### Evaluation metric and justification
@@ -268,22 +268,22 @@ For our baseline model, we use a **Logistic Regression** classifier to predict w
 
 Our baseline model uses four features:
 
-- `"YEAR"` — numerical (quantitative)  
-- `"ANOMALY.LEVEL"` — numerical (quantitative)  
-- `"CLIMATE.CATEGORY"` — categorical (nominal)  
-- `"NERC.REGION"` — categorical (nominal)
+- `'YEAR'` — numerical (quantitative)  
+- `'ANOMALY.LEVEL'` — numerical (quantitative)  
+- `'CLIMATE.CATEGORY'` — categorical (nominal)  
+- `'NERC.REGION'` — categorical (nominal)
 
-**Note on `CLIMATE.CATEGORY`:**  
-Although “Cold”, “Normal”, and “Warm” come from numeric ONI thresholds, the dataset only gives these broad categories and not the actual numeric values or exact distances between them. Because the spacing between categories isn’t defined, we treated `CLIMATE.CATEGORY` as a nominal variable and one-hot encoded it. This avoids assuming a linear or evenly spaced relationship that may not actually exist.
+**Note on `'CLIMATE.CATEGORY'`:**  
+Although “Cold”, “Normal”, and “Warm” come from numeric ONI thresholds, the dataset only gives these broad categories and not the actual numeric values or exact distances between them. Because the spacing between categories isn’t defined, we treated `'CLIMATE.CATEGORY'` as a nominal variable and one-hot encoded it. This avoids assuming a linear or evenly spaced relationship that may not actually exist.
 
 ### Encodings and preprocessing
 
 Since the model contains both numeric and categorical variables, we apply the following preprocessing steps inside a single `sklearn` Pipeline:
 
-- **Numeric features** (`YEAR`, `ANOMALY.LEVEL`):  
+- **Numeric features** (`'YEAR'`, `'ANOMALY.LEVEL'`):  
   - Missing values imputed with the **median**
 
-- **Categorical features** (`CLIMATE.CATEGORY`, `NERC.REGION`):  
+- **Categorical features** (`'CLIMATE.CATEGORY'`, `'NERC.REGION'`):  
   - Missing values imputed with the **most frequent** category  
   - Encoded using **One-Hot Encoding** to convert categories into numerical indicator columns  
   - `handle_unknown="ignore"` avoids issues with unseen categories during testing
