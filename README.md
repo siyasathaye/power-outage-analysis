@@ -1,11 +1,3 @@
-<style>
-  /* Crush the giant vertical gap under iframes */
-  iframe {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-</style>
-
 # The Effects of Severe Weather on Power Outage Duration and Overall Impact
 **Authors:** Risa Schloyer & Siya Sathaye  
 *(DSC 80 – Fall 2025 Final Project)*
@@ -17,11 +9,11 @@ In this project, we analyze a dataset of major power outages in the United State
 
 Our project's research question is:
 
-> **How do severe weather events influence the duration and overall impact of major power outages across different regions in the United States?**
+> **What factors and characteristics contribute to long-lasting power outages, and can we predict whether an outage will last more than 24 hours using information available at the time the outage begins?**
 
-Major power outages can result in substantial economic, social, and safety costs. As severe weather events continue to become more and more common, power companies need to understand the correlation between these extreme weather events and the longer, more severe power outages. Understanding this is essential for informing prevention strategies, infrastructure investment, and emergency response planning.
+Major, long-lasting power outages can result in substantial economic, social, and safety costs. Understanding what causes this severe outages is essential for power companies so they're better able to inform prevention strategies, infrastructure investment, and emergency response planning.
 
-To explore this question, we clean and preprocess the original dataset and focus our analysis on the columns most relevant to outage severity, cause, and weather information. Our working dataset has 1534 rows and we will focus our analysis on the following columns:
+To explore this question, we clean and preprocess the original dataset and focus our analysis on the columns most relevant to outage severity, cause, and relevant characteristics of each outage. Our working dataset has 1534 rows and we will focus our analysis on the following columns:
 
 | **Column Name**         | **Description**                                                                                              |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
