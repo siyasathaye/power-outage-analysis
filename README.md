@@ -45,10 +45,22 @@ To explore this question, we clean and preprocess the original dataset and focus
 ## Data Cleaning and Exploratory Data Analysis
 
 ### Data Cleaning
-NOT FINISHED!!!
-- Describe initial issues with the raw dataset.
-- Explain your cleaning steps (handling missing values, fixing datatypes, filtering rows, engineering duration, etc.).
-- Include a small table preview of the cleaned dataset (5 rows).
+
+We started by removing irrelevant or empty columns (such as the OBS and columns that contained only missing values). Next, we combined each date time pair (OUTAGE.START.DATE + OUTAGE.START.TIME, and the same for restoration time and date) into singular columns containing the time and date, so that the dataset was less complex and more succinct. Then, we dropped the  original date/time columns since their information was preserved and they were redundant.
+
+We also converted multiple columns such as YEAR, MONTH, ANOMALY.LEVEL, OUTAGE.DURATION, and CUSTOMERS.AFFECTED to numeric types incase they were not already, so they could be used reliably in calculations. We then renamed OUTAGE.DURATION to OUTAGE.DURATION.MIN to make the unit explicit, as that was not initially clear to us.
+
+To focus the analysis on variables relevant to our project only, we kept a selected subset of columns (listed above) and dropped all columns we didn't feel were relevant to our project. Finally, I created an IS_SEVERE indicator that flags outages caused by severe weather, as we intended to do some exploration of the differences between outages caused by severe weather and those not.
+
+The first few rows of the cleaned DataFrame are shown below.
+
+|   YEAR |   MONTH | CAUSE.CATEGORY     |   OUTAGE.DURATION.MIN |   CUSTOMERS.AFFECTED | U.S._STATE   | NERC.REGION   | IS_SEVERE   |
+|-------:|--------:|:-------------------|----------------------:|---------------------:|:-------------|:--------------|:------------|
+|   2011 |       7 | severe weather     |                  3060 |                70000 | Minnesota    | MRO           | True        |
+|   2014 |       5 | intentional attack |                     1 |                  nan | Minnesota    | MRO           | False       |
+|   2010 |      10 | severe weather     |                  3000 |                70000 | Minnesota    | MRO           | True        |
+|   2012 |       6 | severe weather     |                  2550 |                68200 | Minnesota    | MRO           | True        |
+|   2015 |       7 | severe weather     |                  1740 |               250000 | Minnesota    | MRO           | True        |
 
 ### Univariate Analysis
 We wanted to investigate the distribution of outage duration to get a better understanding of how common extremely long outages were. The distribution of outage durations is extremely right-skewed, with most outages lasting under a few thousand minutes while a small number last tens of thousands of minutes. This indicates that long, severe outages are rare but disproportionately impactful.
@@ -70,7 +82,7 @@ We also wanted to explore how outages caused by severe weather differed in durat
   frameborder="0"
 ></iframe>
 
-### Grouped Table
+### Grouped Table - MARKDOWN!!!!
 The table below summarizes outage duration statistics by cause category. Severe weather stands out as both **the most frequent cause of major outages** and one of the causes with a **higher median duration**, indicating that weather-driven outages are not only common but also relatively long-lasting.
 
 | Cause Category               | Mean Duration (min) | Median Duration (min) | Count |
