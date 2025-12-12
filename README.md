@@ -45,6 +45,7 @@ To explore this question, we clean and preprocess the original dataset and focus
 ## Data Cleaning and Exploratory Data Analysis
 
 ### Data Cleaning
+NOT FINISHED!!!
 - Describe initial issues with the raw dataset.
 - Explain your cleaning steps (handling missing values, fixing datatypes, filtering rows, engineering duration, etc.).
 - Include a small table preview of the cleaned dataset (5 rows).
