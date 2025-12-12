@@ -61,7 +61,7 @@ The distribution of outage durations is extremely right-skewed, with most outage
   frameborder="0"
 ></iframe>
 
-<h3 style="margin-top: 0.5rem;">Bivariate Analysis</h3>
+### Bivariate Analysis
 Both severe and non-severe outages show highly right-skewed duration distributions, but outages caused by severe weather tend to have longer typical durations, with a higher median and a larger interquartile range (IQR) than outages from other causes. However, the single most extreme outage durations in the dataset are associated with non-severe causes, which produce a few very long events.
 
 **Plot:**  
