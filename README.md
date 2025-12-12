@@ -52,15 +52,15 @@ We also converted multiple columns such as YEAR, MONTH, ANOMALY.LEVEL, OUTAGE.DU
 
 To focus the analysis on variables relevant to our project only, we kept a selected subset of columns (listed above) and dropped all columns we didn't feel were relevant to our project. Finally, I created an IS_SEVERE indicator that flags outages caused by severe weather, as we intended to do some exploration of the differences between outages caused by severe weather and those not.
 
-The first few rows of the cleaned DataFrame are shown below.
+The first few rows of the cleaned DataFrame are shown below, with a few columns selected for display.
 
-|   YEAR |   MONTH | CAUSE.CATEGORY     |   OUTAGE.DURATION.MIN |   CUSTOMERS.AFFECTED | U.S._STATE   | NERC.REGION   | IS_SEVERE   |
-|-------:|--------:|:-------------------|----------------------:|---------------------:|:-------------|:--------------|:------------|
-|   2011 |       7 | severe weather     |                  3060 |                70000 | Minnesota    | MRO           | True        |
-|   2014 |       5 | intentional attack |                     1 |                  nan | Minnesota    | MRO           | False       |
-|   2010 |      10 | severe weather     |                  3000 |                70000 | Minnesota    | MRO           | True        |
-|   2012 |       6 | severe weather     |                  2550 |                68200 | Minnesota    | MRO           | True        |
-|   2015 |       7 | severe weather     |                  1740 |               250000 | Minnesota    | MRO           | True        |
+|   YEAR |   MONTH | CAUSE.CATEGORY     | U.S._STATE   | NERC.REGION   |
+|-------:|--------:|:-------------------|:-------------|:--------------|
+|   2011 |       7 | severe weather     | Minnesota    | MRO           |
+|   2014 |       5 | intentional attack | Minnesota    | MRO           |
+|   2010 |      10 | severe weather     | Minnesota    | MRO           |
+|   2012 |       6 | severe weather     | Minnesota    | MRO           |
+|   2015 |       7 | severe weather     | Minnesota    | MRO           |
 
 ### Univariate Analysis
 We wanted to investigate the distribution of outage duration to get a better understanding of how common extremely long outages were. The distribution of outage durations is extremely right-skewed, with most outages lasting under a few thousand minutes while a small number last tens of thousands of minutes. This indicates that long, severe outages are rare but disproportionately impactful.
@@ -82,18 +82,18 @@ We also wanted to explore how outages caused by severe weather differed in durat
   frameborder="0"
 ></iframe>
 
-### Grouped Table - MARKDOWN!!!!
+### Grouped Table
 The table below summarizes outage duration statistics by cause category. Severe weather stands out as both **the most frequent cause of major outages** and one of the causes with a **higher median duration**, indicating that weather-driven outages are not only common but also relatively long-lasting.
 
-| Cause Category               | Mean Duration (min) | Median Duration (min) | Count |
-|-----------------------------|----------------------|------------------------|-------|
-| equipment failure           | 1816.91              | 221.0                  | 55    |
-| fuel supply emergency       | 13484.03             | 3960.0                 | 38    |
-| intentional attack          | 429.98               | 56.0                   | 403   |
-| islanding                   | 200.55               | 77.5                   | 44    |
-| public appeal               | 1468.45              | 455.0                  | 69    |
-| severe weather              | 3883.99              | 2460.0                 | 744   |
-| system operability disruption | 728.87             | 215.0                  | 123   |
+| CAUSE.CATEGORY                |     mean |   median |   count |
+|:------------------------------|---------:|---------:|--------:|
+| equipment failure             |  1816.91 |    221   |      55 |
+| fuel supply emergency         | 13484    |   3960   |      38 |
+| intentional attack            |   429.98 |     56   |     403 |
+| islanding                     |   200.55 |     77.5 |      44 |
+| public appeal                 |  1468.45 |    455   |      69 |
+| severe weather                |  3883.99 |   2460   |     744 |
+| system operability disruption |   728.87 |    215   |     123 |
 
 ---
 
