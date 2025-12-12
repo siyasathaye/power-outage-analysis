@@ -88,9 +88,9 @@ The table below summarizes outage duration statistics by cause category. Severe 
 ## Assessment of Missingness
 
 ### NMAR Discussion
-I believe the CUSTOMERS.AFFECTED column is NMAR. The likelihood that this value is missing may depend on whether the number of customers actually affected is very large. Power companies may fail to collect customer counts for very small outages (because they are considered insignificant). 
+One column I believe to be NMAR is `'OUTAGE.DURATION.MIN'`. I believe this column could be NMAR because the missingness may be due to the fact that power companies may not want to report excessively long outage durations, as it could imply slow response time. As a result, companies may be less inclined to report outage duration when the true value is extremely high, thus making these missing values NMAR.
 
-To make this missingness MAR... NOT FINISHED
+To determine whether `'OUTAGE.DURATION.MIN'` is actually MAR, I would want to collect information about each power company’s typical response times and determine whether companies which tend to have slower response times typically have missing outage durations. If outages occured in places where certain companies managed electricity, then the missingness could be explained by an observed variable, which would mean it is MAR rather than NMAR.
 
 ### Missingness Dependency Test
 We focused on the missingness of CUSTOMERS.AFFECTED (how many customers were impacted by an outage). We wanted to see whether missing values in this column depend on other variables in the dataset.
