@@ -51,9 +51,8 @@ NOT FINISHED!!!
 - Include a small table preview of the cleaned dataset (5 rows).
 
 ### Univariate Analysis
-The distribution of outage durations is extremely right-skewed, with most outages lasting under a few thousand minutes while a small number last tens of thousands of minutes. This indicates that long, severe outages are rare but disproportionately impactful.
+We wanted to investigate the distribution of outage duration to get a better understanding of how common extremely long outages were. The distribution of outage durations is extremely right-skewed, with most outages lasting under a few thousand minutes while a small number last tens of thousands of minutes. This indicates that long, severe outages are rare but disproportionately impactful.
 
-**Plot:**  
 <iframe
   src="assets/outage_duration_hist.html"
   width="800"
@@ -62,9 +61,8 @@ The distribution of outage durations is extremely right-skewed, with most outage
 ></iframe>
 
 ### Bivariate Analysis
-Both severe and non-severe outages show highly right-skewed duration distributions, but outages caused by severe weather tend to have longer typical durations, with a higher median and a larger interquartile range (IQR) than outages from other causes. However, the single most extreme outage durations in the dataset are associated with non-severe causes, which produce a few very long events.
+We also wanted to explore how outages caused by severe weather differed in duration from outages caused by other causes, because we hypothesized that severe weather would likely be the cause of many of the more serious outages. Both severe and non-severe outages show highly right-skewed duration distributions, but outages caused by severe weather tend to have longer typical durations, with a higher median and a larger interquartile range (IQR) than outages from other causes. However, the single most extreme outage durations in the dataset are associated with non-severe causes, which produce a few very long events.
 
-**Plot:**  
 <iframe
   src="assets/outage_duration_vs_severe_weather.html"
   width="800"
@@ -153,25 +151,25 @@ Because the p-value is large, we do not have evidence that the missingness of `'
 
 ## Hypothesis Testing
 #### **Research question:**  
-Do outages marked as *severe* last longer, on average, than outages that are *not* severe?
+Do outages caused by severe weather last longer, on average, than outages that caused by reasons other than severe weather?
 
 ### Hypotheses
 
 - **Null hypothesis (H₀):**  
-  The average outage duration is the same for severe and non-severe outages  
-  (mean duration for severe outages = mean duration for non-severe outages).
+  The average outage duration is the same for severe weather and non-severe  weather outages  
+  (mean duration for severe weather outages = mean duration for non-severe weather outages).
 
 - **Alternative hypothesis (Hₐ):**  
-  Severe outages have a **longer** average duration than non-severe outages  
-  (mean duration for severe outages > mean duration for non-severe outages).
+  Severe weather outages have a **longer** average duration than non-severe weather outages  
+  (mean duration for severe weather outages > mean duration for non-severe weather outages).
 
-We do a signed difference rather then absolute because we are specifically interested in whether severe outages last **longer**, not just whether the means are different.
+We do a signed difference rather then absolute because we are specifically interested in whether severe weather outages last **longer**, not just whether the means are different.
 
 ### Test statistic and significance level
 
 We used the **difference in sample means** as our test statistic:
 
-> test statistic = (mean duration for severe outages) − (mean duration for non-severe outages)
+> test statistic = (mean duration for severe weather outages) − (mean duration for non-severe weather outages)
 
 From the data, the observed value of this statistic was approximately **2,538 minutes**.
 
@@ -204,9 +202,9 @@ The figure below shows the **null distribution** (blue bars) with the **observed
 
 Because the p-value is far below our significance level of 0.05, we **reject the null hypothesis**.
 
-There is **strong statistical evidence** in this dataset that outages marked as *severe* last **longer on average** than outages that are not severe.
+There is **strong statistical evidence** in this dataset that outages caused by severe weather last **longer on average** than outages that are not caused by severe weather.
 
-However, this is an **observational** dataset, not a randomized experiment. Therefore, we **cannot prove** that severity *causes* longer outages—we can only say that severity is **strongly associated** with longer outage duration in this data.
+However, this is an **observational** dataset, not a randomized experiment. Therefore, we **cannot prove** that severe weather *causes* longer outages—we can only say that severe weather is **strongly associated** with longer outage duration in this data.
 
 
 ---
