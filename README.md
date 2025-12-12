@@ -1,3 +1,11 @@
+<style>
+  /* Crush the giant vertical gap under iframes */
+  iframe {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+</style>
+
 # The Effects of Severe Weather on Power Outage Duration and Overall Impact
 **Authors:** Risa Schloyer & Siya Sathaye  
 *(DSC 80 – Fall 2025 Final Project)*
