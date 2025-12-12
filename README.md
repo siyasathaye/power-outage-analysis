@@ -60,7 +60,8 @@ The distribution of outage durations is extremely right-skewed, with most outage
   height="600"
   frameborder="0"
 ></iframe>
-### Bivariate Analysis
+
+<h3 style="margin-top: 0.5rem;">Bivariate Analysis</h3>
 Both severe and non-severe outages show highly right-skewed duration distributions, but outages caused by severe weather tend to have longer typical durations, with a higher median and a larger interquartile range (IQR) than outages from other causes. However, the single most extreme outage durations in the dataset are associated with non-severe causes, which produce a few very long events.
 
 **Plot:**  
@@ -94,7 +95,7 @@ One column I believe to be NMAR is `'OUTAGE.DURATION.MIN'`. I believe this colum
 To determine whether `'OUTAGE.DURATION.MIN'` is actually MAR, I would want to collect information about each power company’s typical response times and determine whether companies which tend to have slower response times typically have missing outage durations. If outages occured in places where certain companies managed electricity, then the missingness could be explained by an observed variable, which would mean it is MAR rather than NMAR.
 
 ### Missingness Dependency Test
-We focused on the missingness of CUSTOMERS.AFFECTED (how many customers were impacted by an outage). We wanted to see whether missing values in this column depend on other variables in the dataset.
+We focused on the missingness of `'CUSTOMERS.AFFECTED'` (how many customers were impacted by an outage). We wanted to see whether missing values in this column depend on other variables in the dataset.
 
 ##### Does missingness depend on outage cause?
 
