@@ -72,7 +72,7 @@ We wanted to investigate the distribution of outage duration to get a better und
   width="800"
   height="600"
   frameborder="0"
-  display:block;
+  style="display:block; margin: 0 auto 0.5rem auto;"
 ></iframe>
 
 ### Bivariate Analysis
