@@ -337,21 +337,19 @@ In the next step (Final Model), we will explore a more flexible model that may b
 To improve upon our baseline model, we use a **Decision Tree Classifier** to predict whether an outage becomes a long outage (lasting more than 24 hours).  
 Our target variable is:
 
-- **`LONG_OUTAGE`** — equal to 1 if `OUTAGE.DURATION.MIN > 1440`, and 0 otherwise.
+- **`'LONG_OUTAGE'`** — equal to 1 if `'OUTAGE.DURATION.MIN'` > 1440, and 0 otherwise.
 
 ---
 
 ### Engineered Features
 
-We created two new features based on the data-generating process, both of which are known at the start of an outage:
+We created two new features, both of which are known at the start of an outage:
 
 - **`SALES_PER_CUSTOMER`** = `TOTAL.SALES / TOTAL.CUSTOMERS`  
   Reflects average electrical load per customer. Higher load may complicate restoration.
 
 - **`CUSTOMERS_PER_AREA`** = `TOTAL.CUSTOMERS / AREAPCT_URBAN`  
-  Measures customer density relative to urban land area, which may affect restoration difficulty and speed.
-
-These features capture structural differences in grid demand and population layout, which we believed would be key contributors to long outage duration.
+  Measures how concentrated customers are relative to the amount of urban land in the state.
 
 ---
 
@@ -361,22 +359,28 @@ Our final model uses a larger feature set than the baseline, including:
 
 - **Temporal:**  
   - `YEAR`, `MONTH`
+  Capture long-term infrastructure trends and strong seasonal patterns (e.g., hurricane season, winter storms). Certain months are systematically more likely to produce long outages due to climate cycles.
 
 - **Climate:**  
   - `ANOMALY.LEVEL`, `CLIMATE.REGION`
+  Outage severity is strongly influenced by weather anomalies and regional climate patterns. These features help the model distinguish states routinely impacted by severe storms from those with more stable climates.
 
 - **Grid region:**  
   - `NERC.REGION`
+  Different NERC regions operate under different grid architectures and reliability standards. These structural differences influence how quickly restoration can occur after a major outage.
 
 - **Economic & infrastructure:**  
   - `TOTAL.PRICE`, `TOTAL.SALES`, `TOTAL.CUSTOMERS`  
   - `PC.REALGSP.STATE`, `UTIL.REALGSP`
+  These capture economic capacity, grid size, demand load, and reinvestment levels. States with higher consumption or larger grids may face more complex restoration processes after severe outages.
 
 - **Urbanization & demographic:**  
   - `POPULATION`, `POPPCT_URBAN`, `POPDEN_URBAN`, `POPDEN_RURAL`, `AREAPCT_URBAN`
+  Restoration difficulty depends on how populations are distributed. Dense urban areas can slow repairs due to infrastructure congestion, while sparse rural areas often require longer travel and repair times.
 
 - **Engineered features:**  
   - `SALES_PER_CUSTOMER`, `CUSTOMERS_PER_AREA`
+  Designed to capture average grid load per customer and concentration of customers relative to available urban land, both of which affect outage severity and restoration complexity.
 
 These variables offer a more complete view of the conditions present at outage onset.
 
