@@ -75,6 +75,7 @@ We wanted to investigate the distribution of outage duration to get a better und
   style="display:block;"
 ></iframe>
 
+
 ### Bivariate Analysis
 We also wanted to explore how outages caused by severe weather differed in duration from outages caused by other causes, because we hypothesized that severe weather would likely be the cause of many of the more serious outages. Both severe and non-severe outages show highly right-skewed duration distributions, but outages caused by severe weather tend to have longer typical durations, with a higher median and a larger interquartile range (IQR) than outages from other causes. However, the single most extreme outage durations in the dataset are associated with non-severe causes, which produce a few very long events.
 
@@ -85,6 +86,7 @@ We also wanted to explore how outages caused by severe weather differed in durat
   frameborder="0"
   style="display:block;"
 ></iframe>
+
 
 ### Grouped Table
 The table below summarizes outage duration statistics by cause category. Severe weather stands out as both **the most frequent cause of outages** and one of the causes with a **higher median duration**, indicating that weather-driven outages are not only common but also relatively long-lasting.
@@ -125,6 +127,7 @@ Several patterns stand out. For example, intentional attack and fuel supply emer
   style="display:block;"
 ></iframe> 
 
+
 Next, we actually tested whether the missingness of `'CUSTOMERS.AFFECTED'` depends on `'CAUSE.CATEGORY'` using a permutation test. We encoded each cause category as a numeric code and computed our test statistic: the difference in the mean encoded cause category between rows where `'CUSTOMERS.AFFECTED'` is missing and rows where it is not.
 
 We calculated an observed test statistic of (~-1.57) and then we generated 5,000 permutations of the missingness labels to simulate a null distribution where missingness is independent of cause category. The histogram below shows this null distribution, with the observed statistic marked by a red vertical line.
@@ -138,6 +141,8 @@ Our observed value lies far outside the range of permuted statistics, producing 
   frameborder="0"
   style="display:block;"
 ></iframe>
+
+
 ##### Does missingness depend on U.S. state?
 
 To investigate whether the missingness of `'CUSTOMERS.AFFECTED'` depends on `'U.S._STATE'`, we again used `'CA_MISSING'` as an indicator for whether the value is missing. We then compared missingness proportions among every different state label we had.
@@ -153,6 +158,7 @@ However, the proportions vary without a clear pattern or consistent separation b
   frameborder="0"
   style="display:block;"
 ></iframe>
+
 
 Next, we tested this relationship using a permutation test. We again encoded U.S. states as numeric state codes, calculated the difference in mean state code between missing and non-missing observations, and compared this observed statistic to a null distribution created using 5,000 random label shuffles.
 
@@ -218,6 +224,7 @@ The figure below shows the **null distribution** (blue bars) with the **observed
   frameborder="0"
   style="display:block;"
 ></iframe>
+
 
 ### Conclusion
 
@@ -508,6 +515,7 @@ We use a **one-sided** test at **alpha = 0.05**, testing whether rural precision
   frameborder="0"
   style="display:block;"
 ></iframe>
+
 
 ### p-value
 
