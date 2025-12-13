@@ -331,11 +331,109 @@ In the next step (Final Model), we will explore a more flexible model that may b
 ---
 
 ## Final Model
-- Discuss additional features engineered and why they help.
-- Explain model selection (e.g., Random Forest vs Linear Regression).
-- Describe hyperparameter tuning.
-- Report final performance and compare to baseline.
-- Briefly discuss limitations.
+
+To improve upon our baseline model, we use a **Decision Tree Classifier** to predict whether an outage becomes a long outage (lasting more than 24 hours).  
+Our target variable is:
+
+- **`LONG_OUTAGE`** — equal to 1 if `OUTAGE.DURATION.MIN > 1440`, and 0 otherwise.
+
+---
+
+### Engineered Features
+
+We created two new features based on the data-generating process, both of which are known at the start of an outage:
+
+- **`SALES_PER_CUSTOMER`** = `TOTAL.SALES / TOTAL.CUSTOMERS`  
+  Reflects average electrical load per customer. Higher load may complicate restoration.
+
+- **`CUSTOMERS_PER_AREA`** = `TOTAL.CUSTOMERS / AREAPCT_URBAN`  
+  Measures customer density relative to urban land area, which may affect restoration difficulty and speed.
+
+These features capture structural differences in grid demand and population layout, which we believed would be key contributors to long outage duration.
+
+---
+
+### Features in the Final Model
+
+Our final model uses a larger feature set than the baseline, including:
+
+- **Temporal:**  
+  - `YEAR`, `MONTH`
+
+- **Climate:**  
+  - `ANOMALY.LEVEL`, `CLIMATE.REGION`
+
+- **Grid region:**  
+  - `NERC.REGION`
+
+- **Economic & infrastructure:**  
+  - `TOTAL.PRICE`, `TOTAL.SALES`, `TOTAL.CUSTOMERS`  
+  - `PC.REALGSP.STATE`, `UTIL.REALGSP`
+
+- **Urbanization & demographic:**  
+  - `POPULATION`, `POPPCT_URBAN`, `POPDEN_URBAN`, `POPDEN_RURAL`, `AREAPCT_URBAN`
+
+- **Engineered features:**  
+  - `SALES_PER_CUSTOMER`, `CUSTOMERS_PER_AREA`
+
+These variables offer a more complete view of the conditions present at outage onset.
+
+---
+
+### Modeling Algorithm
+
+We use a **Decision Tree Classifier** inside an `sklearn` **Pipeline**, which performs:
+
+- **Scaling** of numeric features  
+- **One-Hot Encoding** of categorical features  
+- **Balanced class weighting** (`class_weight="balanced"`) to address the imbalance between long and short outages
+
+Decision Trees can model **nonlinear relationships** and **feature interactions**, both of which are likely present in outage duration patterns.
+
+---
+
+### Hyperparameter Tuning
+
+We tune the model using **GridSearchCV** with 4-fold cross-validation and optimize for **F1-score**.  
+The following hyperparameters were searched:
+
+- **`max_depth`** — controls model complexity  
+- **`min_samples_split`** — minimum samples required to split  
+- **`min_samples_leaf`** — minimum samples per leaf to reduce overfitting  
+
+**Best hyperparameters found:**
+
+```
+max_depth = 14
+min_samples_split = 10
+min_samples_leaf = 4
+```
+
+---
+
+### Final Model Performance
+
+On the held-out test set, our final model achieves:
+
+- **F1-score: 0.662**
+
+Compared to the baseline:
+
+- **Baseline Logistic Regression F1:** 0.426  
+- **Final Decision Tree F1:** 0.662  
+
+This is a **substantial improvement** in predictive performance.
+
+---
+
+### Why the Final Model Performs Better
+
+- Outage duration is influenced by **nonlinear interactions** between climate, infrastructure, and population structure. The Decision Tree captures these interactions, while Logistic Regression cannot.  
+- The **expanded feature set** provides more information about grid conditions and demographics.  
+- The **engineered features** explicitly encode grid load and customer density, both of which logically affect restoration difficulty.
+
+Together, these improvements enable the final model to identify long outages far more accurately than the baseline.
+
 
 ---
 
