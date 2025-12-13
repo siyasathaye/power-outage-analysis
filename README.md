@@ -11,7 +11,7 @@ Our project's research question is:
 
 > **What factors and characteristics contribute to long-lasting power outages, and can we predict whether an outage will last more than 24 hours using information available at the time the outage begins?**
 
-Major, long-lasting power outages can result in substantial economic, social, and safety costs. Understanding what causes this severe outages is essential for power companies so they're better able to inform prevention strategies, infrastructure investment, and emergency response planning.
+Major, long-lasting power outages can result in substantial economic, social, and safety costs. Understanding what causes these severe outages is essential for power companies so they're better able to inform prevention strategies, infrastructure investment, and emergency response planning.
 
 To explore this question, we clean and preprocess the original dataset and focus our analysis on the columns most relevant to outage severity, cause, and relevant characteristics of each outage. Our working dataset has 1534 rows and we will focus our analysis on the following columns:
 
@@ -46,11 +46,13 @@ To explore this question, we clean and preprocess the original dataset and focus
 
 ### Data Cleaning
 
-We started by removing irrelevant or empty columns (such as the OBS and columns that contained only missing values). Next, we combined each date time pair (OUTAGE.START.DATE + OUTAGE.START.TIME, and the same for restoration time and date) into singular columns containing the time and date, so that the dataset was less complex and more succinct. Then, we dropped the  original date/time columns since their information was preserved and they were redundant.
+We started by removing irrelevant or empty columns (such as the OBS and columns that contained only missing values). 
 
-We also converted multiple columns such as YEAR, MONTH, ANOMALY.LEVEL, OUTAGE.DURATION, and CUSTOMERS.AFFECTED to numeric types incase they were not already, so they could be used reliably in calculations. We then renamed OUTAGE.DURATION to OUTAGE.DURATION.MIN to make the unit explicit, as that was not initially clear to us.
+Next, we combined each date time pair (OUTAGE.START.DATE + OUTAGE.START.TIME, and the same for restoration time and date) into singular columns containing the time and date, so that the dataset was less complex and more succinct. We then dropped the original date/time columns since their information was preserved and they were redundant.
 
-To focus the analysis on variables relevant to our project only, we kept a selected subset of columns (listed above) and dropped all columns we didn't feel were relevant to our project. Finally, I created an IS_SEVERE indicator that flags outages caused by severe weather, as we intended to do some exploration of the differences between outages caused by severe weather and those not.
+We also converted multiple columns such as YEAR, MONTH, ANOMALY.LEVEL, OUTAGE.DURATION, and CUSTOMERS.AFFECTED to numeric types incase they were not already, so they could be used reliably in calculations. We also renamed OUTAGE.DURATION to OUTAGE.DURATION.MIN to make the unit explicit, as that was not initially clear to us.
+
+To focus the analysis on variables relevant to our project only, we kept a select subset of columns (listed above) and dropped all columns we didn't feel were relevant to our project. Finally, we created an IS_SEVERE column which flags outages caused by severe weather, as we intended to do some exploration of the differences between outages caused by severe weather and those not.
 
 The first few rows of the cleaned DataFrame are shown below, with a few columns selected for display.
 
@@ -83,7 +85,7 @@ We also wanted to explore how outages caused by severe weather differed in durat
 ></iframe>
 
 ### Grouped Table
-The table below summarizes outage duration statistics by cause category. Severe weather stands out as both **the most frequent cause of major outages** and one of the causes with a **higher median duration**, indicating that weather-driven outages are not only common but also relatively long-lasting.
+The table below summarizes outage duration statistics by cause category. Severe weather stands out as both **the most frequent cause of outages** and one of the causes with a **higher median duration**, indicating that weather-driven outages are not only common but also relatively long-lasting.
 
 | CAUSE.CATEGORY                |     mean |   median |   count |
 |:------------------------------|---------:|---------:|--------:|
@@ -163,7 +165,7 @@ Because the p-value is large, we do not have evidence that the missingness of `'
 
 ## Hypothesis Testing
 #### **Research question:**  
-Do outages caused by severe weather last longer, on average, than outages that caused by reasons other than severe weather?
+Do outages caused by severe weather last longer, on average, than outages that are caused by reasons other than severe weather?
 
 ### Hypotheses
 
@@ -175,7 +177,7 @@ Do outages caused by severe weather last longer, on average, than outages that c
   Severe weather outages have a **longer** average duration than non-severe weather outages  
   (mean duration for severe weather outages > mean duration for non-severe weather outages).
 
-We do a signed difference rather then absolute because we are specifically interested in whether severe weather outages last **longer**, not just whether the means are different.
+We do a one sided test because we are specifically interested in whether severe weather outages last **longer**, not just whether the means are different.
 
 ### Test statistic and significance level
 
@@ -216,7 +218,7 @@ Because the p-value is far below our significance level of 0.05, we **reject the
 
 There is **strong statistical evidence** in this dataset that outages caused by severe weather last **longer on average** than outages that are not caused by severe weather.
 
-However, this is an **observational** dataset, not a randomized experiment. Therefore, we **cannot prove** that severe weather *causes* longer outages—we can only say that severe weather is **strongly associated** with longer outage duration in this data.
+However, this is an **observational** dataset, not a randomized experiment. Therefore, we **cannot prove** that severe weather *causes* longer outages, we can only say that severe weather is **strongly associated** with longer outage duration in this data.
 
 
 ---
