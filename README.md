@@ -81,7 +81,7 @@ We also wanted to explore how outages caused by severe weather differed in durat
 <iframe
   src="assets/outage_duration_vs_severe_weather.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 
@@ -119,7 +119,7 @@ Several patterns stand out. For example, intentional attack and fuel supply emer
 <iframe
   src="assets/missing_by_cause.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe> 
 
@@ -132,7 +132,7 @@ Our observed value lies far outside the range of permuted statistics, producing 
 <iframe
   src="assets/missingness_dep_cause.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 ##### Does missingness depend on U.S. state?
@@ -146,7 +146,7 @@ However, the proportions vary without a clear pattern or consistent separation b
 <iframe
   src="assets/customers_missing_by_state.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 
@@ -159,7 +159,7 @@ Because the p-value is large, we do not have evidence that the missingness of `'
 <iframe
   src="assets/missingness_state_null.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 ---
@@ -209,7 +209,7 @@ The figure below shows the **null distribution** (blue bars) with the **observed
 <iframe
   src="assets/weather_null.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 
@@ -498,7 +498,7 @@ We use a **one-sided** test at **alpha = 0.05**, testing whether rural precision
 <iframe
   src="assets/fairness_analysis.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 
