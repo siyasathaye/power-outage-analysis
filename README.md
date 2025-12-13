@@ -1,4 +1,4 @@
-# Patterns and Drivers of U.S. Power Outages
+# Understanding the Causes of U.S. Power Outages
 **Authors:** Risa Schloyer & Siya Sathaye  
 *(DSC 80 – Fall 2025 Final Project)*
 
