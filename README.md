@@ -72,7 +72,7 @@ We wanted to investigate the distribution of outage duration to get a better und
   width="800"
   height="400"
   frameborder="0"
-  style="display:block;"
+  style="display:block; margin-bottom: 15px;"
 ></iframe>
 
 
