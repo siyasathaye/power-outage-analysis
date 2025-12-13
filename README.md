@@ -448,7 +448,7 @@ Together, these improvements enable the final model to identify long outages far
 ---
 
 ## Fairness Analysis
-- In this step, we evaluate whether our final model behaves fairly across different groups: **urban-dominant states** and **rural-dominant states**.
+In this step, we evaluate whether our final model behaves fairly across different groups: **urban-dominant states** and **rural-dominant states**.
 
 ### Group Definitions
 
@@ -489,10 +489,6 @@ This represents a world where group membership does not affect model performance
 ### Significance Level
 
 We use a **one-sided** test at **alpha = 0.05**, testing whether rural precision is lower than urban precision.
-
-### P-value
-
-p-value = 0.6144
 
 <iframe
   src="assets/fairness_analysis.html"
