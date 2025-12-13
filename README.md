@@ -490,6 +490,11 @@ This represents a world where group membership does not affect model performance
 
 We use a **one-sided** test at **alpha = 0.05**, testing whether rural precision is lower than urban precision.
 
+### Results
+
+Our results produced a p-value of 0.6144, which is much larger than 0.05, we **fail to reject the null hypothesis**.  
+There is **no statistical evidence** that the model performs worse for rural outages than for urban outages.
+
 <iframe
   src="assets/fairness_analysis.html"
   width="800"
@@ -497,12 +502,6 @@ We use a **one-sided** test at **alpha = 0.05**, testing whether rural precision
   frameborder="0"
   style="display:block; margin-bottom: 50px;"
 ></iframe>
-
-### Conclusion
-
-Because the p-value (0.6144) is much larger than 0.05, we **fail to reject the null hypothesis**.  
-There is **no statistical evidence** that the model performs worse for rural outages than for urban outages.
-
 
 
 ---
