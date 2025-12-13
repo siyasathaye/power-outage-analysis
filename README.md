@@ -400,7 +400,8 @@ Decision Trees can model **nonlinear relationships** and **feature interactions*
 
 ### Hyperparameter Tuning
 
-We tune the model using **GridSearchCV** with 4-fold cross-validation and optimize for **F1-score**.  
+We tune the model using **GridSearchCV** with 4-fold cross-validation and optimize for **F1-score**, selecting the hyperparameters that achieve the highest average F1-score across the folds.
+
 The following hyperparameters were searched:
 
 - **`max_depth`** — controls model complexity  
@@ -435,7 +436,7 @@ This is a **substantial improvement** in predictive performance.
 ### Why the Final Model Performs Better
 
 - Outage duration is influenced by **nonlinear interactions** between climate, infrastructure, and population structure. The Decision Tree captures these interactions, while Logistic Regression cannot.  
-- The **expanded feature set** provides more information about grid conditions and demographics.  
+- The **expanded feature set** provides more information about conditions and demographics.  
 - The **engineered features** explicitly encode grid load and customer density, both of which logically affect restoration difficulty.
 
 Together, these improvements enable the final model to identify long outages far more accurately than the baseline.
@@ -443,19 +444,66 @@ Together, these improvements enable the final model to identify long outages far
 ---
 
 ## Fairness Analysis
-- Define Group X and Group Y.
-- State fairness hypothesis being tested.
-- Show metric for each group.
-- Describe permutation test setup.
-- Report p-value.
-- Conclude whether there is evidence of unfairness.
+- In this step, we evaluate whether our final model behaves fairly across different groups: **urban-dominant states** and **rural-dominant states**.
 
-**(Optional Plot)**  
-<iframe src="assets/fairness.html" width="800" height="600" frameborder="0"></iframe>
+### Group Definitions
 
----
+- **Urban Group (Group X):** States where more than 70% of the population lives in urban areas (`POPPCT_URBAN > 70`)
+- **Rural Group (Group Y):** States where 70% or less of the population lives in urban areas (`POPPCT_URBAN <= 70`)
 
-## References
-List any external sources, documentation, or citations used.
+This grouping is meaningful because restoration difficulty and infrastructure quality can differ substantially between urban and rural regions.
+
+### Evaluation Metric: Precision
+
+We evaluate fairness using **precision**, since long outages (the positive class) are relatively rare and precision measures how often the model's positive predictions are correct.
+
+### Hypotheses
+
+- **Null Hypothesis (H0):**  
+  The model is fair. Precision for urban and rural outages is the same, and any observed difference is due to chance.
+
+- **Alternative Hypothesis (H1):**  
+  The model is unfair. Precision for rural outages is lower than precision for urban outages.
+
+### Test Statistic
+
+We use the difference in precision between the groups:
+
+Test statistic T = (Urban precision) - (Rural precision)
+
+From our model predictions:
+
+- Urban precision = 0.6133  
+- Rural precision = 0.6429  
+
+Observed T = -0.0295
+
+### Permutation Test
+
+We run a permutation test with **N = 5000** permutations.  
+In each iteration, we shuffle the group labels and recompute the precision difference.  
+This represents a world where group membership does not affect model performance (the null scenario).
+
+### Significance Level
+
+We use a **one-sided** test at **alpha = 0.05**, testing whether rural precision is lower than urban precision.
+
+<iframe
+  src="assets/fairness_analysis.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+### p-value
+
+p-value = 0.6144
+
+### Conclusion
+
+Because the p-value (0.6144) is much larger than 0.05, we **fail to reject the null hypothesis**.  
+There is **no statistical evidence** that the model performs worse for rural outages than for urban outages.
+
+
 
 ---
