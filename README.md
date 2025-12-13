@@ -416,9 +416,9 @@ The following hyperparameters were searched:
 
 **Best hyperparameters found:**
 
-max_depth = 14
-min_samples_split = 10
-min_samples_leaf = 4
+- max_depth = 14
+- min_samples_split = 10
+- min_samples_leaf = 4
 
 
 ---
@@ -490,7 +490,7 @@ This represents a world where group membership does not affect model performance
 
 We use a **one-sided** test at **alpha = 0.05**, testing whether rural precision is lower than urban precision.
 
-### p-value
+### P-value
 
 p-value = 0.6144
 
