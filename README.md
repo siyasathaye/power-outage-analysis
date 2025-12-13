@@ -5,7 +5,7 @@
 ---
 
 ## Introduction
-In this project, we analyze a dataset of major power outages in the United States which spans outages from January 2000 to July 2016, acquired from Purdue University’s Laboratory for Advancing Sustainable Critical Infrastructure, at https://engineering.purdue.edu/LASCI/research-data/outages. Along with key information regarding each outage, the dataset includes information about weather conditions, the region and climate in which the outage occurred, and how each outage impacted customers, making it well suited for understanding how severe weather conditions can impact outage severity.
+In this project, we analyze a dataset of major power outages in the United States which spans outages from January 2000 to July 2016, acquired from Purdue University’s Laboratory for Advancing Sustainable Critical Infrastructure, at https://engineering.purdue.edu/LASCI/research-data/outages. Along with key information regarding each outage, the dataset includes information about weather conditions, the region and climate in which the outage occurred, and how each outage impacted customers, making it well suited for understanding the different factors which can impact outage severity.
 
 Our project's research question is:
 
@@ -433,7 +433,6 @@ This is a **substantial improvement** in predictive performance.
 - The **engineered features** explicitly encode grid load and customer density, both of which logically affect restoration difficulty.
 
 Together, these improvements enable the final model to identify long outages far more accurately than the baseline.
-
 
 ---
 
