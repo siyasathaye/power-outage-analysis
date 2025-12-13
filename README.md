@@ -72,7 +72,7 @@ We wanted to investigate the distribution of outage duration to get a better und
   width="800"
   height="400"
   frameborder="0"
-  style="display:block; margin-bottom: 30px;"
+  style="display:block; margin-bottom: 50px;"
 ></iframe>
 
 
@@ -84,7 +84,7 @@ We also wanted to explore how outages caused by severe weather differed in durat
   width="800"
   height="400"
   frameborder="0"
-  style="display:block;"
+  style="display:block; margin-bottom: 50px;"
 ></iframe>
 
 
@@ -124,7 +124,7 @@ Several patterns stand out. For example, intentional attack and fuel supply emer
   width="800"
   height="400"
   frameborder="0"
-  style="display:block;"
+  style="display:block; margin-bottom: 50px;"
 ></iframe> 
 
 
@@ -139,7 +139,7 @@ Our observed value lies far outside the range of permuted statistics, producing 
   width="800"
   height="400"
   frameborder="0"
-  style="display:block;"
+  style="display:block; margin-bottom: 50px;"
 ></iframe>
 
 
@@ -156,7 +156,7 @@ However, the proportions vary without a clear pattern or consistent separation b
   width="800"
   height="400"
   frameborder="0"
-  style="display:block;"
+  style="display:block; margin-bottom: 50px;"
 ></iframe>
 
 
@@ -171,7 +171,7 @@ Because the p-value is large, we do not have evidence that the missingness of `'
   width="800"
   height="400"
   frameborder="0"
-  style="display:block;"
+  style="display:block; margin-bottom: 50px;"
 ></iframe>
 ---
 
@@ -222,7 +222,7 @@ The figure below shows the **null distribution** (blue bars) with the **observed
   width="800"
   height="400"
   frameborder="0"
-  style="display:block;"
+  style="display:block; margin-bottom: 50px;"
 ></iframe>
 
 
@@ -513,7 +513,7 @@ We use a **one-sided** test at **alpha = 0.05**, testing whether rural precision
   width="800"
   height="400"
   frameborder="0"
-  style="display:block;"
+  style="display:block; margin-bottom: 50px;"
 ></iframe>
 
 
