@@ -46,11 +46,11 @@ To explore this question, we clean and preprocess the original dataset and focus
 
 ### Data Cleaning
 
-We started by removing irrelevant or empty columns (such as the OBS and columns that contained only missing values). 
+We started by removing irrelevant or empty columns (such as the `'OBS'` and columns that contained only missing values). 
 
-Next, we combined each date time pair (OUTAGE.START.DATE + OUTAGE.START.TIME, and the same for restoration time and date) into singular columns containing the time and date, so that the dataset was less complex and more succinct. We then dropped the original date/time columns since their information was preserved and they were redundant.
+Next, we combined each date time pair (`'OUTAGE.START.DATE'` + `'OUTAGE.START.TIME'`, and the same for restoration time and date) into singular columns containing the time and date, so that the dataset was less complex and more succinct. We then dropped the original date/time columns since their information was preserved and they were redundant.
 
-We also converted multiple columns such as YEAR, MONTH, ANOMALY.LEVEL, OUTAGE.DURATION, and CUSTOMERS.AFFECTED to numeric types incase they were not already, so they could be used reliably in calculations. We also renamed OUTAGE.DURATION to OUTAGE.DURATION.MIN to make the unit explicit, as that was not initially clear to us.
+We also converted multiple columns such as `'YEAR'`, `'MONTH'`, `'ANOMALY.LEVEL'`, `'OUTAGE.DURATION'`, and `'CUSTOMERS.AFFECTED'` to numeric types incase they were not already, so they could be used reliably in calculations. We also renamed `'OUTAGE.DURATION'` to `'OUTAGE.DURATION.MIN'` to make the unit explicit, as that was not initially clear to us.
 
 To focus the analysis on variables relevant to our project only, we kept a select subset of columns (listed above) and dropped all columns we didn't feel were relevant to our project. Finally, we created an IS_SEVERE column which flags outages caused by severe weather, as we intended to do some exploration of the differences between outages caused by severe weather and those not.
 
@@ -77,7 +77,7 @@ We wanted to investigate the distribution of outage duration to get a better und
 
 
 ### Bivariate Analysis
-We also wanted to explore how outages caused by severe weather differed in duration from outages caused by other causes, because we hypothesized that severe weather would likely be the cause of many of the more serious outages. Both severe and non-severe outages show highly right-skewed duration distributions, but outages caused by severe weather tend to have longer typical durations, with a higher median and a larger interquartile range (IQR) than outages from other causes. However, the single most extreme outage durations in the dataset are associated with non-severe causes, which produce a few very long events.
+We also wanted to explore how outages caused by severe weather differed in duration from outages caused by other causes, because we hypothesized that severe weather would likely be the cause of many of the more serious outages. Both severe and non-severe outages show highly right-skewed duration distributions, but outages caused by severe weather tend to have longer typical durations, with a higher median and a larger interquartile range (IQR) than outages from other causes. However, the single most extreme outage durations in the dataset are associated with non-severe weather causes, which produce a few very long events.
 
 <iframe
   src="assets/outage_duration_vs_severe_weather.html"
@@ -128,7 +128,7 @@ Several patterns stand out. For example, intentional attack and fuel supply emer
 ></iframe> 
 
 
-Next, we actually tested whether the missingness of `'CUSTOMERS.AFFECTED'` depends on `'CAUSE.CATEGORY'` using a permutation test. We encoded each cause category as a numeric code and computed our test statistic: the difference in the mean encoded cause category between rows where `'CUSTOMERS.AFFECTED'` is missing and rows where it is not.
+Next, we actually tested whether the missingness of `'CUSTOMERS.AFFECTED'` depends on `'CAUSE.CATEGORY'` using a permutation test. We created the indicator variable `'CA_MISSING'` to flag whether 'CUSTOMERS.AFFECTED' was missing for each outage, making the permutation test simpler to implement. We encoded each cause category as a numeric code and computed our test statistic: the difference in the mean encoded cause category between rows where `'CUSTOMERS.AFFECTED'` is missing and rows where it is not.
 
 We calculated an observed test statistic of (~-1.57) and then we generated 5,000 permutations of the missingness labels to simulate a null distribution where missingness is independent of cause category. The histogram below shows this null distribution, with the observed statistic marked by a red vertical line.
 
@@ -176,6 +176,7 @@ Because the p-value is large, we do not have evidence that the missingness of `'
 ---
 
 ## Hypothesis Testing
+
 #### **Research question:**  
 Do outages caused by severe weather last longer, on average, than outages that are caused by reasons other than severe weather?
 
@@ -349,9 +350,6 @@ In the next step (Final Model), we will explore a more flexible model that may b
 ## Final Model
 
 To improve upon our baseline model, we use a **Decision Tree Classifier** to predict whether an outage becomes a long outage (lasting more than 24 hours).  
-Our target variable is:
-
-- **`'LONG_OUTAGE'`** — equal to 1 if `'OUTAGE.DURATION.MIN'` > 1440, and 0 otherwise.
 
 ---
 
@@ -359,10 +357,10 @@ Our target variable is:
 
 We created two new features, both of which are known at the start of an outage:
 
-- **`SALES_PER_CUSTOMER`** = `TOTAL.SALES / TOTAL.CUSTOMERS`  
+- **`'SALES_PER_CUSTOMER'`** = `'TOTAL.SALES'` / `'TOTAL.CUSTOMERS'`  
   Reflects average electrical load per customer. Higher load may complicate restoration.
 
-- **`CUSTOMERS_PER_AREA`** = `TOTAL.CUSTOMERS / AREAPCT_URBAN`  
+- **`'CUSTOMERS_PER_AREA'`** = `'TOTAL.CUSTOMERS'` / `'AREAPCT_URBAN'`  
   Measures how concentrated customers are relative to the amount of urban land in the state.
 
 ---
@@ -372,35 +370,23 @@ We created two new features, both of which are known at the start of an outage:
 Our final model uses a larger feature set than the baseline, including:
 
 - **Temporal:**  
-  - `YEAR`, `MONTH
-  `
-  Capture long-term infrastructure trends and strong seasonal patterns (e.g., hurricane season, winter storms). Certain months are systematically more likely to produce long outages due to climate cycles.
+  - `'YEAR'`, `'MONTH'`: Capture long-term infrastructure trends and strong seasonal patterns (e.g., hurricane season, winter storms). Certain months are systematically more likely to produce long outages due to climate cycles.
 
 - **Climate:**  
-  - `ANOMALY.LEVEL`, `CLIMATE.REGION`
-  
-  Outage severity is strongly influenced by weather anomalies and regional climate patterns. These features help the model distinguish states routinely impacted by severe storms from those with more stable climates.
+  - `'ANOMALY.LEVEL'`, `'CLIMATE.REGION'`: Outage severity is strongly influenced by weather anomalies and regional climate patterns. These features help the model distinguish states routinely impacted by severe storms from those with more stable climates.
 
 - **Grid region:**  
-  - `NERC.REGION`
-  
-  Different NERC regions operate under different grid architectures and reliability standards. These structural differences influence how quickly restoration can occur after a major outage.
+  - `'NERC.REGION'`: Different NERC regions operate under different grid architectures and reliability standards. These structural differences influence how quickly restoration can occur after a major outage.
 
 - **Economic & infrastructure:**  
-  - `TOTAL.PRICE`, `TOTAL.SALES`, `TOTAL.CUSTOMERS`  
-  - `PC.REALGSP.STATE`, `UTIL.REALGSP`
-  
-  These capture economic capacity, grid size, demand load, and reinvestment levels. States with higher consumption or larger grids may face more complex restoration processes after severe outages.
+  - `'TOTAL.PRICE'`, `'TOTAL.SALES'`, `'TOTAL.CUSTOMERS'`  
+  - `'PC.REALGSP.STATE'`, `'UTIL.REALGSP'`: These capture economic capacity, grid size, demand load, and reinvestment levels. States with higher consumption or larger grids may face more complex restoration processes after severe outages.
 
 - **Urbanization & demographic:**  
-  - `POPULATION`, `POPPCT_URBAN`, `POPDEN_URBAN`, `POPDEN_RURAL`, `AREAPCT_URBAN`
-  
-  Restoration difficulty depends on how populations are distributed. Dense urban areas can slow repairs due to infrastructure congestion, while sparse rural areas often require longer travel and repair times.
+  - `'POPULATION'`, `'POPPCT_URBAN'`, `'POPDEN_URBAN'`, `'POPDEN_RURAL'`, `'AREAPCT_URBAN'`: Restoration difficulty depends on how populations are distributed. Dense urban areas can slow repairs due to infrastructure congestion, while sparse rural areas often require longer travel and repair times.
 
 - **Engineered features:**  
-  - `SALES_PER_CUSTOMER`, `CUSTOMERS_PER_AREA`
-  
-  Designed to capture average grid load per customer and concentration of customers relative to available urban land, both of which affect outage severity and restoration complexity.
+  - `'SALES_PER_CUSTOMER'`, `'CUSTOMERS_PER_AREA'`: Designed to capture average grid load per customer and concentration of customers relative to available urban land, both of which affect outage severity and restoration complexity.
 
 These variables offer a more complete view of the conditions present at outage onset.
 
@@ -430,11 +416,10 @@ The following hyperparameters were searched:
 
 **Best hyperparameters found:**
 
-```
 max_depth = 14
 min_samples_split = 10
 min_samples_leaf = 4
-```
+
 
 ---
 
@@ -457,7 +442,6 @@ This is a **substantial improvement** in predictive performance.
 
 - Outage duration is influenced by **nonlinear interactions** between climate, infrastructure, and population structure. The Decision Tree captures these interactions, while Logistic Regression cannot.  
 - The **expanded feature set** provides more information about conditions and demographics.  
-- The **engineered features** explicitly encode grid load and customer density, both of which logically affect restoration difficulty.
 
 Together, these improvements enable the final model to identify long outages far more accurately than the baseline.
 
@@ -470,8 +454,6 @@ Together, these improvements enable the final model to identify long outages far
 
 - **Urban Group (Group X):** States where more than 70% of the population lives in urban areas (`POPPCT_URBAN > 70`)
 - **Rural Group (Group Y):** States where 70% or less of the population lives in urban areas (`POPPCT_URBAN <= 70`)
-
-This grouping is meaningful because restoration difficulty and infrastructure quality can differ substantially between urban and rural regions.
 
 ### Evaluation Metric: Precision
 
@@ -508,6 +490,10 @@ This represents a world where group membership does not affect model performance
 
 We use a **one-sided** test at **alpha = 0.05**, testing whether rural precision is lower than urban precision.
 
+### p-value
+
+p-value = 0.6144
+
 <iframe
   src="assets/fairness_analysis.html"
   width="800"
@@ -515,11 +501,6 @@ We use a **one-sided** test at **alpha = 0.05**, testing whether rural precision
   frameborder="0"
   style="display:block; margin-bottom: 50px;"
 ></iframe>
-
-
-### p-value
-
-p-value = 0.6144
 
 ### Conclusion
 
