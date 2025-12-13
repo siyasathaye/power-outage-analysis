@@ -83,6 +83,7 @@ We also wanted to explore how outages caused by severe weather differed in durat
   width="800"
   height="400"
   frameborder="0"
+  style="display:block;"
 ></iframe>
 
 ### Grouped Table
@@ -121,6 +122,7 @@ Several patterns stand out. For example, intentional attack and fuel supply emer
   width="800"
   height="400"
   frameborder="0"
+  style="display:block;"
 ></iframe> 
 
 Next, we actually tested whether the missingness of `'CUSTOMERS.AFFECTED'` depends on `'CAUSE.CATEGORY'` using a permutation test. We encoded each cause category as a numeric code and computed our test statistic: the difference in the mean encoded cause category between rows where `'CUSTOMERS.AFFECTED'` is missing and rows where it is not.
@@ -134,6 +136,7 @@ Our observed value lies far outside the range of permuted statistics, producing 
   width="800"
   height="400"
   frameborder="0"
+  style="display:block;"
 ></iframe>
 ##### Does missingness depend on U.S. state?
 
@@ -148,6 +151,7 @@ However, the proportions vary without a clear pattern or consistent separation b
   width="800"
   height="400"
   frameborder="0"
+  style="display:block;"
 ></iframe>
 
 Next, we tested this relationship using a permutation test. We again encoded U.S. states as numeric state codes, calculated the difference in mean state code between missing and non-missing observations, and compared this observed statistic to a null distribution created using 5,000 random label shuffles.
@@ -161,6 +165,7 @@ Because the p-value is large, we do not have evidence that the missingness of `'
   width="800"
   height="400"
   frameborder="0"
+  style="display:block;"
 ></iframe>
 ---
 
@@ -211,6 +216,7 @@ The figure below shows the **null distribution** (blue bars) with the **observed
   width="800"
   height="400"
   frameborder="0"
+  style="display:block;"
 ></iframe>
 
 ### Conclusion
@@ -500,6 +506,7 @@ We use a **one-sided** test at **alpha = 0.05**, testing whether rural precision
   width="800"
   height="400"
   frameborder="0"
+  style="display:block;"
 ></iframe>
 
 ### p-value
